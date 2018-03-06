@@ -11,7 +11,7 @@ namespace BankSystem
             _authenticationService = authenticationService;
         }
 
-        public bool IsUserLoggedIn()
+        public bool IsUserSignedIn()
         {
             return _authenticationService.IsAuthenticated();
         }

@@ -8,23 +8,23 @@ namespace BankSystem.Tests
     public class BankApiTests
     {
         [TestMethod]
-        public void IsUserLoggedIn_ReturnsFalse_WhenNoUserIsLoggedIn()
+        public void IsUserSignedIn_ReturnsFalse_WhenUserIsNotSignedIn()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.IsAuthenticated()).Returns(false);
 
             var bank = new BankApi(authServiceMock.Object);
-            Assert.IsFalse(bank.IsUserLoggedIn());
+            Assert.IsFalse(bank.IsUserSignedIn());
         }
 
         [TestMethod]
-        public void IsUserLoggedIn_ReturnsTrue_WhenUserIsLoggedIn()
+        public void IsUserSignedIn_ReturnsTrue_WhenUserIsSignedIn()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.IsAuthenticated()).Returns(true);
 
             var bank = new BankApi(authServiceMock.Object);
-            Assert.IsTrue(bank.IsUserLoggedIn());
+            Assert.IsTrue(bank.IsUserSignedIn());
         }
     }
 }
