@@ -1,5 +1,6 @@
 using BankSystem.Authentication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace BankSystem.Tests
 {
@@ -9,9 +10,10 @@ namespace BankSystem.Tests
         [TestMethod]
         public void IsUserLoggedIn_ReturnsFalse_WhenNoUserIsLoggedIn()
         {
-            var fakeAuthenticationService = new FakeAuthenticationService();
-            var bank = new BankApi(fakeAuthenticationService);
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(a => a.IsAuthenticated()).Returns(false);
 
+            var bank = new BankApi(authServiceMock.Object);
             Assert.IsFalse(bank.IsUserLoggedIn());
         }
     }
