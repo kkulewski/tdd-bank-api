@@ -1,14 +1,19 @@
-﻿using System;
+﻿using Bank.Authentication;
 
 namespace Bank
 {
     public class BankApi
     {
-        private IBankUser loggedUser;
+        private readonly IAuthenticationService _authenticationService;
+
+        public BankApi(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
 
         public bool IsUserLoggedIn()
         {
-            return loggedUser != null;
+            return _authenticationService.IsAuthenticated();
         }
     }
 }
