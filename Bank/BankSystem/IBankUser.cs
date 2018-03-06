@@ -1,4 +1,4 @@
-﻿namespace Bank
+﻿namespace BankSystem
 {
     interface IBankUser
     {

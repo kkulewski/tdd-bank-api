@@ -1,6 +1,6 @@
-﻿using Bank.Authentication;
+﻿using BankSystem.Authentication;
 
-namespace Bank
+namespace BankSystem
 {
     public class BankApi
     {

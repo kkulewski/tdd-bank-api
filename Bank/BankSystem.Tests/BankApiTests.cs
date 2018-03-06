@@ -1,7 +1,7 @@
-using Bank.Authentication;
+using BankSystem.Authentication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Bank.Tests
+namespace BankSystem.Tests
 {
     [TestClass]
     public class BankApiTests

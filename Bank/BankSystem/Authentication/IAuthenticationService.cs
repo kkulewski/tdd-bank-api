@@ -1,4 +1,4 @@
-﻿namespace Bank.Authentication
+﻿namespace BankSystem.Authentication
 {
     public interface IAuthenticationService
     {
