@@ -16,5 +16,15 @@ namespace BankSystem.Tests
             var bank = new BankApi(authServiceMock.Object);
             Assert.IsFalse(bank.IsUserLoggedIn());
         }
+
+        [TestMethod]
+        public void IsUserLoggedIn_ReturnsTrue_WhenUserIsLoggedIn()
+        {
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(a => a.IsAuthenticated()).Returns(true);
+
+            var bank = new BankApi(authServiceMock.Object);
+            Assert.IsTrue(bank.IsUserLoggedIn());
+        }
     }
 }
