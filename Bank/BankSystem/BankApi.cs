@@ -15,5 +15,10 @@ namespace BankSystem
         {
             return _authenticationService.IsAuthenticated();
         }
+
+        public bool SignIn(string login, string password)
+        {
+            return _authenticationService.Authenticate(login, password);
+        }
     }
 }
