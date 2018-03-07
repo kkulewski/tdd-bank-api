@@ -38,7 +38,13 @@ namespace BankSystem.Authentication
 
         public bool Deauthenticate()
         {
-            throw new NotImplementedException();
+            if (SignedUser == null)
+            {
+                return false;
+            }
+
+            SignedUser = null;
+            return true;
         }
     }
 }
