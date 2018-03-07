@@ -46,5 +46,25 @@ namespace BankSystem.Tests
             var bank = new BankApi(authServiceMock.Object);
             Assert.IsFalse(bank.SignIn("wronglogin", "wrongpassword"));
         }
+
+        [TestMethod]
+        public void SignOut_ReturnsFalse_WhenDeauthenticationFails()
+        {
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(a => a.Deauthenticate()).Returns(false);
+
+            var bank = new BankApi(authServiceMock.Object);
+            Assert.IsFalse(bank.SignOut());
+        }
+
+        [TestMethod]
+        public void SignOut_ReturnsTrue_WhenDeauthenticationSucceeds()
+        {
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(a => a.Deauthenticate()).Returns(true);
+
+            var bank = new BankApi(authServiceMock.Object);
+            Assert.IsTrue(bank.SignOut());
+        }
     }
 }

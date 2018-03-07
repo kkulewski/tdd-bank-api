@@ -9,5 +9,7 @@ namespace BankSystem.Authentication
         bool IsAuthenticated();
 
         bool Authenticate(string login, string password);
+
+        bool Deauthenticate();
     }
 }

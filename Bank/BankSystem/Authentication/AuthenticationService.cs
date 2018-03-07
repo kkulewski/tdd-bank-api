@@ -35,5 +35,10 @@ namespace BankSystem.Authentication
             SignedUser = user;
             return true;
         }
+
+        public bool Deauthenticate()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

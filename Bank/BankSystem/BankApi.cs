@@ -20,5 +20,10 @@ namespace BankSystem
         {
             return _authenticationService.Authenticate(login, password);
         }
+
+        public bool SignOut()
+        {
+            return _authenticationService.Deauthenticate();
+        }
     }
 }
