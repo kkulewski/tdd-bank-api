@@ -1,6 +1,0 @@
-﻿namespace BankSystem
-{
-    interface IBankUser
-    {
-    }
-}

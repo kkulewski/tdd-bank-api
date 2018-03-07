@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="Authentication\IAuthenticationService.cs" />
     <Compile Include="BankApi.cs" />
-    <Compile Include="IBankUser.cs" />
+    <Compile Include="User\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
