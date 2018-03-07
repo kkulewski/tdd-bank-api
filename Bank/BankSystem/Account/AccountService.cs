@@ -1,5 +1,4 @@
-﻿using System;
-using BankSystem.User;
+﻿using BankSystem.User;
 
 namespace BankSystem.Account
 {
@@ -7,7 +6,7 @@ namespace BankSystem.Account
     {
         public decimal GetBalance(IUser user)
         {
-            throw new NotImplementedException();
+            return user.Balance;
         }
     }
 }
