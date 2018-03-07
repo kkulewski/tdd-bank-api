@@ -32,7 +32,13 @@ namespace BankSystem
 
         public decimal GetMyAccountBalance()
         {
-            throw new NotImplementedException();
+            if (!IsUserSignedIn())
+            {
+                throw new Exception("You are not signed in.");
+            }
+
+            var user = _authenticationService.SignedUser;
+            return _accountService.GetBalance(user);
         }
     }
 }
