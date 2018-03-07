@@ -5,7 +5,7 @@ namespace BankSystem.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        private IUserStore _userStore;
+        private readonly IUserStore _userStore;
 
         public IUser SignedUser { get; private set; }
 
@@ -21,7 +21,14 @@ namespace BankSystem.Authentication
 
         public bool Authenticate(string login, string password)
         {
-            throw new NotImplementedException();
+            var user = _userStore.GetUserByLogin(login);
+            if (user.Password != password)
+            {
+                return false;
+            }
+
+            SignedUser = user;
+            return true;
         }
     }
 }
