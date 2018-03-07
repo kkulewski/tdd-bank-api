@@ -38,5 +38,15 @@ namespace BankSystem
             var user = _authenticationService.SignedUser;
             return _accountService.GetBalance(user);
         }
+
+        public bool SendMoneyTransfer(string recipientLogin, decimal amount)
+        {
+            if (_userStore.GetUserByLogin(recipientLogin) == null)
+            {
+                return false;
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }

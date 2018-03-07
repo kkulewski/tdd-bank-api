@@ -78,5 +78,19 @@ namespace BankSystem.Tests
 
             Assert.AreEqual(balance, bank.GetMyAccountBalance());
         }
+
+        [TestMethod]
+        public void SendMoneyTransfer_ReturnsFalse_WhenRecipientDoesNotExist()
+        {
+            const string invalidRecipientLogin = "invalid_recipient_login";
+            const decimal exampleAmount = 100.0M;
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+            var accountServiceMock = new Mock<IAccountService>();
+
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, _userStoreDouble);
+
+            Assert.IsFalse(bank.SendMoneyTransfer(invalidRecipientLogin, exampleAmount));
+        }
     }
 }
