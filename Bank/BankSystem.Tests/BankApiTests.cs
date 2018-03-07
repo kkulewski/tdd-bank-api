@@ -28,7 +28,7 @@ namespace BankSystem.Tests
         }
 
         [TestMethod]
-        public void Login_ReturnsTrue_WhenUserSigns_WithCorrectCredentials()
+        public void SignIn_ReturnsTrue_WhenUserSigns_WithCorrectCredentials()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Authenticate("testlogin", "testpassword")).Returns(true);
@@ -38,7 +38,7 @@ namespace BankSystem.Tests
         }
 
         [TestMethod]
-        public void Login_ReturnsFalse_WhenUserSigns_WithIncorrectCredentials()
+        public void SignIn_ReturnsFalse_WhenUserSigns_WithIncorrectCredentials()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Authenticate("testlogin", "testpassword")).Returns(true);
