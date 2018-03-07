@@ -22,6 +22,11 @@ namespace BankSystem.Authentication
         public bool Authenticate(string login, string password)
         {
             var user = _userStore.GetUserByLogin(login);
+            if (user == null)
+            {
+                return false;
+            }
+
             if (user.Password != password)
             {
                 return false;
