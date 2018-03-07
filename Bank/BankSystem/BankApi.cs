@@ -29,5 +29,10 @@ namespace BankSystem
         {
             return _authenticationService.Deauthenticate();
         }
+
+        public decimal GetMyAccountBalance()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,6 @@
 using BankSystem.Account;
 using BankSystem.Authentication;
+using BankSystem.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -80,6 +81,22 @@ namespace BankSystem.Tests
             var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
 
             Assert.IsTrue(bank.SignOut());
+        }
+
+        [TestMethod]
+        public void GetMyAccountBalance_ReturnsPredefinedAmount()
+        {
+            const decimal balance = 1000.0M;
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(x => x.IsAuthenticated()).Returns(true);
+
+            var accountServiceMock = new Mock<IAccountService>();
+            accountServiceMock.Setup(x => x.GetBalance(It.IsAny<IUser>())).Returns(balance);
+
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object);
+
+            Assert.AreEqual(balance, bank.GetMyAccountBalance());
         }
     }
 }
