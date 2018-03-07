@@ -1,6 +1,7 @@
 ﻿using System;
 using BankSystem.Account;
 using BankSystem.Authentication;
+using BankSystem.User;
 
 namespace BankSystem
 {
@@ -8,11 +9,13 @@ namespace BankSystem
     {
         private readonly IAuthenticationService _authenticationService;
         private readonly IAccountService _accountService;
+        private readonly IUserStore _userStore;
 
-        public BankApi(IAuthenticationService authenticationService, IAccountService accountService)
+        public BankApi(IAuthenticationService authenticationService, IAccountService accountService, IUserStore userStore)
         {
             _authenticationService = authenticationService;
             _accountService = accountService;
+            _userStore = userStore;
         }
 
         public bool SignIn(string login, string password)

@@ -10,11 +10,13 @@ namespace BankSystem.Tests
     public class BankApiTests
     {
         private IAccountService _accountServiceDouble;
+        private IUserStore _userStoreDouble;
 
         [TestInitialize]
         public void Initialize()
         {
             _accountServiceDouble = new Mock<IAccountService>().Object;
+            _userStoreDouble = new Mock<IUserStore>().Object;
         }
 
         [TestMethod]
@@ -23,7 +25,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(x => x.Authenticate("testlogin", "testpassword")).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble, _userStoreDouble);
 
             Assert.IsTrue(bank.SignIn("testlogin", "testpassword"));
         }
@@ -34,7 +36,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(x => x.Authenticate("testlogin", "testpassword")).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble, _userStoreDouble);
 
             Assert.IsFalse(bank.SignIn("wronglogin", "wrongpassword"));
         }
@@ -45,7 +47,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(x => x.Deauthenticate()).Returns(false);
 
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble, _userStoreDouble);
 
             Assert.IsFalse(bank.SignOut());
         }
@@ -56,7 +58,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(x => x.Deauthenticate()).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble, _userStoreDouble);
 
             Assert.IsTrue(bank.SignOut());
         }
@@ -72,7 +74,7 @@ namespace BankSystem.Tests
             var accountServiceMock = new Mock<IAccountService>();
             accountServiceMock.Setup(x => x.GetBalance(It.IsAny<IUser>())).Returns(balance);
 
-            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, _userStoreDouble);
 
             Assert.AreEqual(balance, bank.GetMyAccountBalance());
         }
