@@ -15,11 +15,6 @@ namespace BankSystem
             _accountService = accountService;
         }
 
-        public bool IsUserSignedIn()
-        {
-            return _authenticationService.IsAuthenticated();
-        }
-
         public bool SignIn(string login, string password)
         {
             return _authenticationService.Authenticate(login, password);
@@ -32,7 +27,7 @@ namespace BankSystem
 
         public decimal GetMyAccountBalance()
         {
-            if (!IsUserSignedIn())
+            if (!_authenticationService.IsAuthenticated())
             {
                 throw new Exception("You are not signed in.");
             }

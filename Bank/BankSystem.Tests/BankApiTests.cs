@@ -18,28 +18,6 @@ namespace BankSystem.Tests
         }
 
         [TestMethod]
-        public void IsUserSignedIn_ReturnsFalse_WhenUserIsNotSignedIn()
-        {
-            var authServiceMock = new Mock<IAuthenticationService>();
-            authServiceMock.Setup(x => x.IsAuthenticated()).Returns(false);
-
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
-
-            Assert.IsFalse(bank.IsUserSignedIn());
-        }
-
-        [TestMethod]
-        public void IsUserSignedIn_ReturnsTrue_WhenUserIsSignedIn()
-        {
-            var authServiceMock = new Mock<IAuthenticationService>();
-            authServiceMock.Setup(x => x.IsAuthenticated()).Returns(true);
-
-            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
-
-            Assert.IsTrue(bank.IsUserSignedIn());
-        }
-
-        [TestMethod]
         public void SignIn_ReturnsTrue_WhenUserSigns_WithCorrectCredentials()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
