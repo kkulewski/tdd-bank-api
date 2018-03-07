@@ -16,5 +16,24 @@ namespace BankSystem.Tests
 
             Assert.IsFalse(authService.IsAuthenticated());
         }
+
+        [TestMethod]
+        public void Authenticate_ReturnsTrue_WhenUserSuccessfullyAuthenticated()
+        {
+            var testUserLogin = "testlogin";
+            var testUserPassword = "testpassword";
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Login).Returns(testUserLogin);
+            userMock.Setup(x => x.Password).Returns(testUserPassword);
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(testUserLogin)).Returns(userMock.Object);
+
+            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            bool authResult = authService.Authenticate(testUserLogin, testUserPassword);
+
+            Assert.IsTrue(authResult);
+        }
     }
 }
