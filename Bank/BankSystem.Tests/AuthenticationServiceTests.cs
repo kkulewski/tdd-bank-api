@@ -9,7 +9,7 @@ namespace BankSystem.Tests
     public class AuthenticationServiceTests
     {
         [TestMethod]
-        public void IsAuthenticated_ReturnsFalse_WhenNoAuthenticatedUser()
+        public void IsAuthenticated_ReturnsFalse_WhenThereWasNoAttemptToAuthenticateYet()
         {
             var userStoreMock = new Mock<IUserStore>();
             IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
@@ -53,6 +53,44 @@ namespace BankSystem.Tests
             bool authResult = authService.Authenticate(testUserLogin, "wrongpassword");
 
             Assert.IsFalse(authResult);
+        }
+
+        [TestMethod]
+        public void IsAuthenticated_ReturnsTrue_WhenUserSuccessfullyAuthenticated()
+        {
+            var testUserLogin = "testlogin";
+            var testUserPassword = "testpassword";
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Login).Returns(testUserLogin);
+            userMock.Setup(x => x.Password).Returns(testUserPassword);
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(testUserLogin)).Returns(userMock.Object);
+
+            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            authService.Authenticate(testUserLogin, testUserPassword);
+            
+            Assert.IsTrue(authService.IsAuthenticated());
+        }
+
+        [TestMethod]
+        public void IsAuthenticated_ReturnsFalse_WhenUserAuthenticationFailed()
+        {
+            var testUserLogin = "testlogin";
+            var testUserPassword = "testpassword";
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Login).Returns(testUserLogin);
+            userMock.Setup(x => x.Password).Returns(testUserPassword);
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(testUserLogin)).Returns(userMock.Object);
+
+            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            authService.Authenticate(testUserLogin, "wrongpassword");
+
+            Assert.IsFalse(authService.IsAuthenticated());
         }
     }
 }
