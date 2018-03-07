@@ -16,7 +16,7 @@ namespace BankSystem.Authentication
 
         public bool IsAuthenticated()
         {
-            throw new NotImplementedException();
+            return SignedUser != null;
         }
 
         public bool Authenticate(string login, string password)
