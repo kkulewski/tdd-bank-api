@@ -111,5 +111,33 @@ namespace BankSystem.Tests
 
             Assert.IsFalse(authService.IsAuthenticated());
         }
+
+        [TestMethod]
+        public void Deauthenticate_ReturnsFalse_WhenNoUserIsAuthenticated()
+        {
+            var userStoreMock = new Mock<IUserStore>();
+            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+
+            Assert.IsFalse(authService.Deauthenticate());
+        }
+
+        [TestMethod]
+        public void Deauthenticate_ReturnsTrue_WhenDeauthenticationSucceeds_WithAuthenticatedUser()
+        {
+            var testUserLogin = "testlogin";
+            var testUserPassword = "testpassword";
+
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Login).Returns(testUserLogin);
+            userMock.Setup(x => x.Password).Returns(testUserPassword);
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(testUserLogin)).Returns(userMock.Object);
+
+            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            authService.Authenticate(testUserLogin, testUserPassword);
+
+            Assert.IsTrue(authService.Deauthenticate());
+        }
     }
 }
