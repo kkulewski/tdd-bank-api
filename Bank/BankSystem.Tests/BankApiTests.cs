@@ -1,3 +1,4 @@
+using BankSystem.Account;
 using BankSystem.Authentication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -7,13 +8,21 @@ namespace BankSystem.Tests
     [TestClass]
     public class BankApiTests
     {
+        private IAccountService _accountServiceDouble;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _accountServiceDouble = new Mock<IAccountService>().Object;
+        }
+
         [TestMethod]
         public void IsUserSignedIn_ReturnsFalse_WhenUserIsNotSignedIn()
         {
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.IsAuthenticated()).Returns(false);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsFalse(bank.IsUserSignedIn());
         }
 
@@ -23,7 +32,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.IsAuthenticated()).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsTrue(bank.IsUserSignedIn());
         }
 
@@ -33,7 +42,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Authenticate("testlogin", "testpassword")).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsTrue(bank.SignIn("testlogin", "testpassword"));
         }
 
@@ -43,7 +52,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Authenticate("testlogin", "testpassword")).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsFalse(bank.SignIn("wronglogin", "wrongpassword"));
         }
 
@@ -53,7 +62,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Deauthenticate()).Returns(false);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsFalse(bank.SignOut());
         }
 
@@ -63,7 +72,7 @@ namespace BankSystem.Tests
             var authServiceMock = new Mock<IAuthenticationService>();
             authServiceMock.Setup(a => a.Deauthenticate()).Returns(true);
 
-            var bank = new BankApi(authServiceMock.Object);
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble);
             Assert.IsTrue(bank.SignOut());
         }
     }

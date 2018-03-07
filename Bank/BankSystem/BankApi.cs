@@ -1,14 +1,18 @@
-﻿using BankSystem.Authentication;
+﻿using System;
+using BankSystem.Account;
+using BankSystem.Authentication;
 
 namespace BankSystem
 {
     public class BankApi
     {
         private readonly IAuthenticationService _authenticationService;
+        private readonly IAccountService _accountService;
 
-        public BankApi(IAuthenticationService authenticationService)
+        public BankApi(IAuthenticationService authenticationService, IAccountService accountService)
         {
             _authenticationService = authenticationService;
+            _accountService = accountService;
         }
 
         public bool IsUserSignedIn()
