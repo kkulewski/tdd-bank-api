@@ -1,3 +1,4 @@
+using System;
 using BankSystem.Account;
 using BankSystem.Authentication;
 using BankSystem.User;
@@ -77,6 +78,17 @@ namespace BankSystem.Tests
             var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, _userStoreDouble);
 
             Assert.AreEqual(balance, bank.GetMyAccountBalance());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(Exception))]
+        public void GetMyAccountBalance_Throws_WhenUserIsNotAuthenticated()
+        {
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(x => x.IsAuthenticated()).Returns(false);
+
+            var bank = new BankApi(authServiceMock.Object, _accountServiceDouble, _userStoreDouble);
+            bank.GetMyAccountBalance();
         }
 
         [TestMethod]
