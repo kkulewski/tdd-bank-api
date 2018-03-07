@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountServiceTests.cs" />
     <Compile Include="AuthenticationServiceTests.cs" />
     <Compile Include="BankApiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
