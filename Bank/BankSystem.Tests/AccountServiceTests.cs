@@ -21,5 +21,17 @@ namespace BankSystem.Tests
 
             Assert.AreEqual(userBalance, accountService.GetBalance(user));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(AccountOperationException))]
+        public void CreateMoneyTransfer_Throws_WhenAmountInvalid()
+        {
+            var invalidAmount = -100.0M;
+            var senderMock = new Mock<IUser>();
+            var recipientMock = new Mock<IUser>();
+
+            IAccountService accountService = new AccountService();
+            Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, invalidAmount));
+        }
     }
 }

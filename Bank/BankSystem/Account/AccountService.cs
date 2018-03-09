@@ -1,4 +1,5 @@
-﻿using BankSystem.User;
+﻿using System;
+using BankSystem.User;
 
 namespace BankSystem.Account
 {
@@ -7,6 +8,16 @@ namespace BankSystem.Account
         public decimal GetBalance(IUser user)
         {
             return user.Balance;
+        }
+
+        public IMoneyTransfer CreateMoneyTransfer(IUser sender, IUser recipient, decimal amount)
+        {
+            if (amount <= 0.0M)
+            {
+                throw new AccountOperationException("Invalid amount.");
+            }
+
+            throw new NotImplementedException();
         }
     }
 }
