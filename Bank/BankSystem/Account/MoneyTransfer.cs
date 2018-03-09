@@ -20,5 +20,11 @@ namespace BankSystem.Account
             Completed = false;
             CreatedOn = DateTime.Now;
         }
+
+        public void SetCompleted()
+        {
+            Completed = true;
+            CompletedOn = DateTime.Now;
+        }
     }
 }

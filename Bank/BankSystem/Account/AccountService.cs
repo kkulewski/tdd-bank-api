@@ -34,7 +34,9 @@ namespace BankSystem.Account
                 return false;
             }
 
-            throw new NotImplementedException();
+            transfer.Recipient.Balance += transfer.Amount;
+            transfer.SetCompleted();
+            return true;
         }
     }
 }

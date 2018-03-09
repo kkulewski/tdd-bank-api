@@ -11,5 +11,7 @@ namespace BankSystem.Account
         bool Completed { get; }
         DateTime CreatedOn { get; }
         DateTime CompletedOn { get; }
+
+        void SetCompleted();
     }
 }

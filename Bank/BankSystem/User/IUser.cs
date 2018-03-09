@@ -5,6 +5,6 @@
         string Login { get; }
         string Password { get; }
 
-        decimal Balance { get; }
+        decimal Balance { get; set; }
     }
 }

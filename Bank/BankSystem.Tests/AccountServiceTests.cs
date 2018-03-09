@@ -91,13 +91,29 @@ namespace BankSystem.Tests
         //}
 
         [TestMethod]
-        public void Execute_ReturnsFalse_WhenTransferIsAlreadyCompleted()
+        public void ExecuteMoneyTransfer_ReturnsFalse_WhenTransferIsAlreadyCompleted()
         {
             var transferMock = new Mock<IMoneyTransfer>();
             transferMock.Setup(x => x.Completed).Returns(true);
 
             IAccountService accountService = new AccountService();
             Assert.IsFalse(accountService.ExecuteMoneyTransfer(transferMock.Object));
+        }
+
+        [TestMethod]
+        public void ExecuteMoneyTransfer_ReturnsTrue_WhenTransferSucceeded()
+        {
+            var amount = 100.0M;
+            var senderBalance = amount;
+
+            var senderMock = new Mock<IUser>();
+            senderMock.Setup(x => x.Balance).Returns(senderBalance);
+            var recipientMock = new Mock<IUser>();
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+
+            Assert.IsTrue(accountService.ExecuteMoneyTransfer(transfer));
         }
     }
 }
