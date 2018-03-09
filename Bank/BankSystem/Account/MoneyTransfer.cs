@@ -8,16 +8,16 @@ namespace BankSystem.Account
         public IUser Sender { get; }
         public IUser Recipient { get; }
         public decimal Amount { get; }
-        public bool Complete { get; private set; }
+        public bool Completed { get; private set; }
         public DateTime CreatedOn { get; }
-        public DateTime CommitedOn { get; private set; }
+        public DateTime CompletedOn { get; private set; }
 
         public MoneyTransfer(IUser sender, IUser recipient, decimal amount)
         {
             Sender = sender;
             Recipient = recipient;
             Amount = amount;
-            Complete = false;
+            Completed = false;
             CreatedOn = DateTime.Now;
         }
     }

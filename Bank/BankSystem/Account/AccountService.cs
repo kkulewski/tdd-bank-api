@@ -29,7 +29,7 @@ namespace BankSystem.Account
 
         public bool ExecuteMoneyTransfer(IMoneyTransfer transfer)
         {
-            if (transfer.Complete)
+            if (transfer.Completed)
             {
                 return false;
             }

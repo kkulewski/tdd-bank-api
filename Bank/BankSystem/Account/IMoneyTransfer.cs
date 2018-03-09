@@ -8,8 +8,8 @@ namespace BankSystem.Account
         IUser Sender { get; }
         IUser Recipient { get; }
         decimal Amount { get; }
-        bool Complete { get; }
+        bool Completed { get; }
         DateTime CreatedOn { get; }
-        DateTime CommitedOn { get; }
+        DateTime CompletedOn { get; }
     }
 }

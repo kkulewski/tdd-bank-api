@@ -94,7 +94,7 @@ namespace BankSystem.Tests
         public void Execute_ReturnsFalse_WhenTransferIsAlreadyCompleted()
         {
             var transferMock = new Mock<IMoneyTransfer>();
-            transferMock.Setup(x => x.Complete).Returns(true);
+            transferMock.Setup(x => x.Completed).Returns(true);
 
             IAccountService accountService = new AccountService();
             Assert.IsFalse(accountService.ExecuteMoneyTransfer(transferMock.Object));
