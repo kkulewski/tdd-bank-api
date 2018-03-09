@@ -7,5 +7,7 @@ namespace BankSystem.Account
         decimal GetBalance(IUser user);
 
         IMoneyTransfer CreateMoneyTransfer(IUser sender, IUser recipient, decimal amount);
+
+        bool ExecuteMoneyTransfer(IMoneyTransfer transfer);
     }
 }

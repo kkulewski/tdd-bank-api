@@ -25,5 +25,16 @@ namespace BankSystem.Account
             
             return new MoneyTransfer(sender, recipient, amount);
         }
+
+
+        public bool ExecuteMoneyTransfer(IMoneyTransfer transfer)
+        {
+            if (transfer.Complete)
+            {
+                return false;
+            }
+
+            throw new NotImplementedException();
+        }
     }
 }

@@ -89,5 +89,15 @@ namespace BankSystem.Tests
         //        Assert.AreEqual(expectedDate.Date, transfer.CreatedOn.Date);
         //    }
         //}
+
+        [TestMethod]
+        public void Execute_ReturnsFalse_WhenTransferIsAlreadyCompleted()
+        {
+            var transferMock = new Mock<IMoneyTransfer>();
+            transferMock.Setup(x => x.Complete).Returns(true);
+
+            IAccountService accountService = new AccountService();
+            Assert.IsFalse(accountService.ExecuteMoneyTransfer(transferMock.Object));
+        }
     }
 }
