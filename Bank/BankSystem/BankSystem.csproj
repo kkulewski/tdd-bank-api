@@ -51,6 +51,7 @@
     <Compile Include="User\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\IUserStore.cs" />
+    <Compile Include="User\FakeUser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

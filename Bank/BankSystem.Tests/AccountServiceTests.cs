@@ -115,5 +115,23 @@ namespace BankSystem.Tests
 
             Assert.IsTrue(accountService.ExecuteMoneyTransfer(transfer));
         }
+
+        [TestMethod]
+        public void ExecuteMoneyTransfer_AddsCorrectAmount_ToRecipientBalance()
+        {
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+            var transferAmount = 100.0M;
+
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
+            accountService.ExecuteMoneyTransfer(transfer);
+
+            var recipientExpectedBalance = recipientInitialBalance + transferAmount;
+            Assert.AreEqual(recipientExpectedBalance, recipient.Balance);
+        }
     }
 }
