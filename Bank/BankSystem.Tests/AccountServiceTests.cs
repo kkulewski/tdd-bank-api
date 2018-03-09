@@ -49,5 +49,20 @@ namespace BankSystem.Tests
             IAccountService accountService = new AccountService();
             Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, validAmount));
         }
+
+        [TestMethod]
+        public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectAmount()
+        {
+            var amount = 100.0M;
+            var senderBalance = 100.0M;
+
+            var senderMock = new Mock<IUser>();
+            senderMock.Setup(x => x.Balance).Returns(senderBalance);
+            var recipientMock = new Mock<IUser>();
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+            Assert.AreEqual(amount, transfer.Amount);
+        }
     }
 }

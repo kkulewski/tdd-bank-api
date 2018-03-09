@@ -1,4 +1,5 @@
-﻿using BankSystem.User;
+﻿using System;
+using BankSystem.User;
 
 namespace BankSystem.Account
 {
@@ -8,5 +9,7 @@ namespace BankSystem.Account
         IUser Recipient { get; }
         decimal Amount { get; }
         bool Complete { get; }
+        DateTime CreatedOn { get; }
+        DateTime CommitedOn { get; }
     }
 }

@@ -22,8 +22,8 @@ namespace BankSystem.Account
             {
                 throw new AccountOperationException("Specified amount not available.");
             }
-
-            throw new NotImplementedException();
+            
+            return new MoneyTransfer(sender, recipient, amount);
         }
     }
 }

@@ -44,6 +44,7 @@
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Account\IAccountService.cs" />
     <Compile Include="Account\IMoneyTransfer.cs" />
+    <Compile Include="Account\MoneyTransfer.cs" />
     <Compile Include="Authentication\AuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />
     <Compile Include="BankApi.cs" />
