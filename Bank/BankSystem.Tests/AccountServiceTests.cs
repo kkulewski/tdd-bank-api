@@ -68,6 +68,22 @@ namespace BankSystem.Tests
             Assert.AreEqual(amount, transfer.Amount);
         }
 
+        [TestMethod]
+        public void CreateMoneyTransfer_SubtractsCorrectAmount_FromSenderBalance()
+        {
+            var senderInitialBalance = 200.0M;
+            var transferAmount = 100.0M;
+
+            var recipientMock = new Mock<IUser>();
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            var _ = accountService.CreateMoneyTransfer(sender, recipientMock.Object, transferAmount);
+
+            var senderExpectedBalance = senderInitialBalance - transferAmount;
+            Assert.AreEqual(senderExpectedBalance, sender.Balance);
+        }
+
         //[TestMethod]
         //public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectCreatedOnDate()
         //{
