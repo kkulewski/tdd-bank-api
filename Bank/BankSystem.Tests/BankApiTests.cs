@@ -104,5 +104,23 @@ namespace BankSystem.Tests
 
             Assert.IsFalse(bank.SendMoneyTransfer(invalidRecipientLogin, exampleAmount));
         }
+
+        [TestMethod]
+        public void SendMoneyTransfer_ReturnsFalse_WhenUserIsNotAuthenticated()
+        {
+            const string recipientLogin = "recipient_login";
+            const decimal exampleAmount = 100.0M;
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+            var accountServiceMock = new Mock<IAccountService>();
+            
+            var recipientMock = new Mock<IUser>();
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(recipientLogin)).Returns(recipientMock.Object);
+
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, userStoreMock.Object);
+
+            Assert.IsFalse(bank.SendMoneyTransfer(recipientLogin, exampleAmount));
+        }
     }
 }

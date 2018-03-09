@@ -41,6 +41,11 @@ namespace BankSystem
 
         public bool SendMoneyTransfer(string recipientLogin, decimal amount)
         {
+            if (!_authenticationService.IsAuthenticated())
+            {
+                return false;
+            }
+
             if (_userStore.GetUserByLogin(recipientLogin) == null)
             {
                 return false;
