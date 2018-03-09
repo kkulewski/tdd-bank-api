@@ -1,4 +1,5 @@
-﻿using BankSystem.Account;
+﻿using System;
+using BankSystem.Account;
 using BankSystem.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -31,6 +32,7 @@ namespace BankSystem.Tests
             var recipientMock = new Mock<IUser>();
 
             IAccountService accountService = new AccountService();
+
             Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, invalidAmount));
         }
 
@@ -45,8 +47,8 @@ namespace BankSystem.Tests
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
 
             var recipientMock = new Mock<IUser>();
-
             IAccountService accountService = new AccountService();
+
             Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, validAmount));
         }
 
@@ -54,7 +56,7 @@ namespace BankSystem.Tests
         public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectAmount()
         {
             var amount = 100.0M;
-            var senderBalance = 100.0M;
+            var senderBalance = amount;
 
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
@@ -62,7 +64,30 @@ namespace BankSystem.Tests
 
             IAccountService accountService = new AccountService();
             IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+
             Assert.AreEqual(amount, transfer.Amount);
         }
+
+        //[TestMethod]
+        //public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectCreatedOnDate()
+        //{
+        //    using (ShimsContext.Create())
+        //    {
+        //        var amount = 100.0M;
+        //        var senderBalance = amount;
+                
+        //        var expectedDate = new DateTime(2018, 1, 1);
+        //        System.Fakes.ShimDateTime.NowGet = () => { return expectedDate; };
+
+        //        var senderMock = new Mock<IUser>();
+        //        senderMock.Setup(x => x.Balance).Returns(senderBalance);
+        //        var recipientMock = new Mock<IUser>();
+
+        //        IAccountService accountService = new AccountService();
+        //        IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+
+        //        Assert.AreEqual(expectedDate.Date, transfer.CreatedOn.Date);
+        //    }
+        //}
     }
 }
