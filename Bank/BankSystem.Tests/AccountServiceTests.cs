@@ -33,5 +33,21 @@ namespace BankSystem.Tests
             IAccountService accountService = new AccountService();
             Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, invalidAmount));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(AccountOperationException))]
+        public void CreateMoneyTransfer_Throws_WhenSenderBalanceIsLowerThanTransferAmount()
+        {
+            var validAmount = 100.0M;
+            var senderBalance = 50.0M;
+
+            var senderMock = new Mock<IUser>();
+            senderMock.Setup(x => x.Balance).Returns(senderBalance);
+
+            var recipientMock = new Mock<IUser>();
+
+            IAccountService accountService = new AccountService();
+            Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, validAmount));
+        }
     }
 }

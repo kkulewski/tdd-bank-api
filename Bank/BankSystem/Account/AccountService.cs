@@ -17,6 +17,12 @@ namespace BankSystem.Account
                 throw new AccountOperationException("Invalid amount.");
             }
 
+            var senderBalance = GetBalance(sender);
+            if (senderBalance < amount)
+            {
+                throw new AccountOperationException("Specified amount not available.");
+            }
+
             throw new NotImplementedException();
         }
     }
