@@ -46,12 +46,26 @@ namespace BankSystem
                 return false;
             }
 
-            if (_userStore.GetUserByLogin(recipientLogin) == null)
+            var sender = _authenticationService.SignedUser;
+            if (sender == null)
             {
                 return false;
             }
 
-            throw new NotImplementedException();
+            var recipient = _userStore.GetUserByLogin(recipientLogin);
+            if (recipient == null)
+            {
+                return false;
+            }
+
+            var transfer = _accountService.CreateMoneyTransfer(sender, recipient, amount);
+            if (transfer == null)
+            {
+                return false;
+            }
+
+            var result = _accountService.ExecuteMoneyTransfer(transfer);
+            return result;
         }
     }
 }

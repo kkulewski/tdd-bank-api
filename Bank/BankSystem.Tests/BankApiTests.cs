@@ -122,5 +122,43 @@ namespace BankSystem.Tests
 
             Assert.IsFalse(bank.SendMoneyTransfer(recipientLogin, exampleAmount));
         }
+
+        [TestMethod]
+        public void SendMoneyTransfer_ReturnsTrue_WhenTransferSucceeds()
+        {
+            var userMock = new Mock<IUser>();
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+
+            authServiceMock
+                .Setup(x => x.IsAuthenticated())
+                .Returns(true);
+
+            authServiceMock
+                .Setup(x => x.SignedUser)
+                .Returns(userMock.Object);
+
+            var userStoreMock = new Mock<IUserStore>();
+
+            userStoreMock
+                .Setup(x => x.GetUserByLogin(It.IsAny<string>()))
+                .Returns(userMock.Object);
+
+            var moneyTransferMock = new Mock<IMoneyTransfer>();
+
+            var accountServiceMock = new Mock<IAccountService>();
+
+            accountServiceMock
+                .Setup(x => x.CreateMoneyTransfer(It.IsAny<IUser>(), It.IsAny<IUser>(), It.IsAny<decimal>()))
+                .Returns(moneyTransferMock.Object);
+
+            accountServiceMock
+                .Setup(x => x.ExecuteMoneyTransfer(It.IsAny<IMoneyTransfer>()))
+                .Returns(true);
+
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, userStoreMock.Object);
+
+            Assert.IsTrue(bank.SendMoneyTransfer("RecipientLogin", 100.0M));
+        }
     }
 }
