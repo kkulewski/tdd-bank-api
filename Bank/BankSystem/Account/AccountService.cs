@@ -22,7 +22,8 @@ namespace BankSystem.Account
             {
                 throw new AccountOperationException("Specified amount not available.");
             }
-            
+
+            sender.Balance -= amount;
             return new MoneyTransfer(sender, recipient, amount);
         }
 
