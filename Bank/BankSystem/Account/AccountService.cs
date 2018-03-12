@@ -24,7 +24,9 @@ namespace BankSystem.Account
             }
 
             sender.Balance -= amount;
-            return new MoneyTransfer(sender, recipient, amount);
+            var transfer = new MoneyTransfer(sender, recipient, amount);
+            sender.PendingTransfers.Add(transfer);
+            return transfer;
         }
 
 
