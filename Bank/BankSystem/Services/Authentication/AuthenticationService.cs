@@ -1,4 +1,5 @@
-﻿using BankSystem.DAL;
+﻿using System;
+using BankSystem.DAL;
 using BankSystem.Models;
 
 namespace BankSystem.Services.Authentication
@@ -47,6 +48,16 @@ namespace BankSystem.Services.Authentication
 
             SignedUser = null;
             return true;
+        }
+
+        public bool SignUp(string login, string password)
+        {
+            if (_userStore.GetUserByLogin(login) != null)
+            {
+                return false;
+            }
+            
+            throw new NotImplementedException();
         }
     }
 }

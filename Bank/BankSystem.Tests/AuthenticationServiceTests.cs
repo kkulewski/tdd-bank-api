@@ -35,8 +35,8 @@ namespace BankSystem.Tests
 
             var userStoreMock = new Mock<IUserStore>();
             userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_userMock);
-            _authServiceWithMockUserStore = new AuthenticationService(userStoreMock.Object);
             var userFactoryMock = new Mock<IUserFactory>();
+            _authServiceWithMockUserStore = new AuthenticationService(userStoreMock.Object, userFactoryMock.Object);
         }
 
         [TestMethod]
@@ -137,6 +137,20 @@ namespace BankSystem.Tests
 
             // ACT
             bool result = _authServiceWithMockUserStore.IsAuthenticated();
+
+            // ASSERT
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SignUp_ReturnsFalse_WhenWithGivenLoginAlreadyExists()
+        {
+            // ARRANGE
+            var duplicateLogin = _userMock.Login;
+            var password = "somePassword";
+
+            // ACT
+            bool result = _authServiceWithMockUserStore.SignUp(duplicateLogin, password);
 
             // ASSERT
             Assert.IsFalse(result);

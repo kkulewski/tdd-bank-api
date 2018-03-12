@@ -11,5 +11,7 @@ namespace BankSystem.Services.Authentication
         bool Authenticate(string login, string password);
 
         bool Deauthenticate();
+
+        bool SignUp(string login, string password);
     }
 }
