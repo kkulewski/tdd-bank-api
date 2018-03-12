@@ -86,28 +86,6 @@ namespace BankSystem.Tests
             Assert.AreEqual(senderExpectedBalance, sender.Balance);
         }
 
-        //[TestMethod]
-        //public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectCreatedOnDate()
-        //{
-        //    using (ShimsContext.Create())
-        //    {
-        //        var amount = 100.0M;
-        //        var senderBalance = amount;
-                
-        //        var expectedDate = new DateTime(2018, 1, 1);
-        //        System.Fakes.ShimDateTime.NowGet = () => { return expectedDate; };
-
-        //        var senderMock = new Mock<IUser>();
-        //        senderMock.Setup(x => x.Balance).Returns(senderBalance);
-        //        var recipientMock = new Mock<IUser>();
-
-        //        IAccountService accountService = new AccountService();
-        //        IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
-
-        //        Assert.AreEqual(expectedDate.Date, transfer.CreatedOn.Date);
-        //    }
-        //}
-
         [TestMethod]
         public void ExecuteMoneyTransfer_ReturnsFalse_WhenTransferIsAlreadyCompleted()
         {
