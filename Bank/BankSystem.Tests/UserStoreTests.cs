@@ -44,12 +44,27 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Add_ReturnsTrue_WhenAddingToNonEmptyList()
         {
-            // ACT
+            // ARRANGE
             _userStore.Add(_someUser);
+
+            // ACT
             var result = _userStore.Add(_otherUser);
 
             // ASSERT
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Add_ReturnsFalse_WhenAddingDuplicateUser()
+        {
+            // ARRANGE
+            _userStore.Add(_someUser);
+
+            // ACT
+            var result = _userStore.Add(_someUserDuplicate);
+
+            // ASSERT
+            Assert.IsFalse(result);
         }
     }
 }
