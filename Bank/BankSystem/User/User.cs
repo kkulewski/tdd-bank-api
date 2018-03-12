@@ -3,7 +3,7 @@ using BankSystem.Account;
 
 namespace BankSystem.User
 {
-    public class FakeUser : IUser
+    public class User : IUser
     {
         public string Login { get; }
         public string Password { get; }
@@ -12,7 +12,7 @@ namespace BankSystem.User
         public List<IMoneyTransfer> PendingTransfers { get; }
         public List<IMoneyTransfer> CompletedTransfers { get; }
 
-        public FakeUser(string login, string password, decimal balance)
+        public User(string login, string password, decimal balance)
         {
             Login = login;
             Password = password;

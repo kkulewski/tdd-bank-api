@@ -14,7 +14,7 @@ namespace BankSystem.Tests
         private string _testUserInvalidLogin;
         private string _testUserInvalidPassword;
 
-        private IUser _testUserDouble;
+        private IUser _userMock;
         private IAuthenticationService _authServiceWithMockUserStore;
 
 
@@ -30,10 +30,10 @@ namespace BankSystem.Tests
             var userMock = new Mock<IUser>();
             userMock.Setup(x => x.Login).Returns(_testUserValidLogin);
             userMock.Setup(x => x.Password).Returns(_testUserValidPassword);
-            _testUserDouble = userMock.Object;
+            _userMock = userMock.Object;
 
             var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
+            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_userMock);
             _authServiceWithMockUserStore = new AuthenticationService(userStoreMock.Object);
         }
 

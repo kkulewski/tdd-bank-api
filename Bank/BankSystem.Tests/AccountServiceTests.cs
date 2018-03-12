@@ -12,8 +12,8 @@ namespace BankSystem.Tests
     {
         private IAccountService _accountService;
         private decimal _defaultTransferAmount;
-        private IUser _senderDouble;
-        private IUser _recipientDouble;
+        private IUser _sender;
+        private IUser _recipient;
 
         [TestInitialize]
         public void Initialize()
@@ -24,8 +24,8 @@ namespace BankSystem.Tests
             var senderInitialBalance = 100.0M;
             var recipientInitialBalance = 0.0M;
 
-            _senderDouble = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            _recipientDouble = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+            _sender = new User.User("Sender", "SenderPass", senderInitialBalance);
+            _recipient = new User.User("Recipient", "RecipientPass", recipientInitialBalance);
         }
 
         [TestMethod]
@@ -100,13 +100,13 @@ namespace BankSystem.Tests
         public void CreateMoneyTransfer_SubtractsCorrectAmount_FromSenderBalance()
         {
             // ARRANGE
-            var senderInitialBalance = _senderDouble.Balance;
+            var senderInitialBalance = _sender.Balance;
             
             // ACT
-            _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ASSERT
-            Assert.AreEqual(senderInitialBalance - _defaultTransferAmount, _senderDouble.Balance);
+            Assert.AreEqual(senderInitialBalance - _defaultTransferAmount, _sender.Balance);
         }
 
         [TestMethod]
@@ -148,54 +148,54 @@ namespace BankSystem.Tests
         public void ExecuteMoneyTransfer_AddsCorrectAmount_ToRecipientBalance()
         {
             // ARRANGE
-            var recipientInitialBalance = _recipientDouble.Balance;
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            var recipientInitialBalance = _recipient.Balance;
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ACT
             _accountService.ExecuteMoneyTransfer(transfer);
 
             // ASSERT
-            Assert.AreEqual(recipientInitialBalance + _defaultTransferAmount, _recipientDouble.Balance);
+            Assert.AreEqual(recipientInitialBalance + _defaultTransferAmount, _recipient.Balance);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsNewTransfer_ToSenderPendingTransfers()
         {
             // ARRANGE
-            var transferCountBeforeNewTransfer = _senderDouble.PendingTransfers.Count;
+            var transferCountBeforeNewTransfer = _sender.PendingTransfers.Count;
 
             // ACT
-            _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ASSERT
-            Assert.AreEqual(transferCountBeforeNewTransfer + 1, _senderDouble.PendingTransfers.Count);
+            Assert.AreEqual(transferCountBeforeNewTransfer + 1, _sender.PendingTransfers.Count);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectSender_ToSenderPendingTransfers()
         {   
             // ACT
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ASSERT
-            Assert.AreEqual(_senderDouble, transfer.Sender);
+            Assert.AreEqual(_sender, transfer.Sender);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectRecipient_ToSenderPendingTransfers()
         {   
             // ACT
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ASSERT
-            Assert.AreEqual(_recipientDouble, transfer.Recipient);
+            Assert.AreEqual(_recipient, transfer.Recipient);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectAmount_ToSenderPendingTransfers()
         {
             // ACT
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ASSERT
             Assert.AreEqual(_defaultTransferAmount, transfer.Amount);
@@ -205,11 +205,11 @@ namespace BankSystem.Tests
         public void ExecuteMoneyTransfer_RemovesTransfer_FromSenderPendingTransfers()
         {
             // ARRANGE
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
             
             // ACT
             _accountService.ExecuteMoneyTransfer(transfer);
-            var transferInSenderPendingTransfers = _senderDouble.PendingTransfers.Contains(transfer);
+            var transferInSenderPendingTransfers = _sender.PendingTransfers.Contains(transfer);
 
             // ASSERT
             Assert.IsFalse(transferInSenderPendingTransfers);
@@ -219,11 +219,11 @@ namespace BankSystem.Tests
         public void ExecuteMoneyTransfer_AddsTransfer_ToSenderCompletedTransfers()
         {
             // ARRANGE
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ACT
             _accountService.ExecuteMoneyTransfer(transfer);
-            var transferInSenderCompletedTransfers = _senderDouble.CompletedTransfers.Contains(transfer);
+            var transferInSenderCompletedTransfers = _sender.CompletedTransfers.Contains(transfer);
 
             // ASSERT
             Assert.IsTrue(transferInSenderCompletedTransfers);
@@ -233,11 +233,11 @@ namespace BankSystem.Tests
         public void ExecuteMoneyTransfer_AddsTransfer_ToRecipientCompletedTransfers()
         {
             // ARRANGE
-            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_sender, _recipient, _defaultTransferAmount);
 
             // ACT
             _accountService.ExecuteMoneyTransfer(transfer);
-            var transferInRecipientCompletedTransfers = _recipientDouble.CompletedTransfers.Contains(transfer);
+            var transferInRecipientCompletedTransfers = _recipient.CompletedTransfers.Contains(transfer);
 
             // ASSERT
             Assert.IsTrue(transferInRecipientCompletedTransfers);
