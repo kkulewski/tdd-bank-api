@@ -134,6 +134,7 @@ namespace BankSystem.Tests
             senderMock.Setup(x => x.PendingTransfers).Returns(new List<IMoneyTransfer>());
             senderMock.Setup(x => x.CompletedTransfers).Returns(new List<IMoneyTransfer>());
             var recipientMock = new Mock<IUser>();
+            recipientMock.Setup(x => x.CompletedTransfers).Returns(new List<IMoneyTransfer>());
             IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
 
             // ACT
@@ -226,6 +227,20 @@ namespace BankSystem.Tests
 
             // ASSERT
             Assert.IsTrue(transferInSenderCompletedTransfers);
+        }
+
+        [TestMethod]
+        public void ExecuteMoneyTransfer_AddsTransfer_ToRecipientCompletedTransfers()
+        {
+            // ARRANGE
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+
+            // ACT
+            _accountService.ExecuteMoneyTransfer(transfer);
+            var transferInRecipientCompletedTransfers = _recipientDouble.CompletedTransfers.Contains(transfer);
+
+            // ASSERT
+            Assert.IsTrue(transferInRecipientCompletedTransfers);
         }
     }
 }
