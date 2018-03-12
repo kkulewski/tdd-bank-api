@@ -66,5 +66,19 @@ namespace BankSystem.Tests
             // ASSERT
             Assert.IsFalse(result);
         }
+
+        [TestMethod]
+        public void GetUserByLogin_ReturnCorrectUser_WhenListContainsTwoUsers()
+        {
+            // ARRANGE
+            _userStore.Add(_someUser);
+            _userStore.Add(_otherUser);
+
+            // ACT
+            var user = _userStore.GetUserByLogin(_someUser.Login);
+
+            // ASSERT
+            Assert.AreEqual(_someUser, user);
+        }
     }
 }
