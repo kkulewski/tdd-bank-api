@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using BankSystem.Account;
 
-namespace BankSystem.User
+namespace BankSystem.Model
 {
     public class User : IUser
     {

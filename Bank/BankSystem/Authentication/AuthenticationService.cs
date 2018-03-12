@@ -1,5 +1,5 @@
-﻿using System;
-using BankSystem.User;
+﻿using BankSystem.Model;
+using BankSystem.Storage;
 
 namespace BankSystem.Authentication
 {

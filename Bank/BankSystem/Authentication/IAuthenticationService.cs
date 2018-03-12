@@ -1,4 +1,4 @@
-﻿using BankSystem.User;
+﻿using BankSystem.Model;
 
 namespace BankSystem.Authentication
 {

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BankSystem.Account;
-using BankSystem.User;
+using BankSystem.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
@@ -24,8 +23,8 @@ namespace BankSystem.Tests
             var senderInitialBalance = 100.0M;
             var recipientInitialBalance = 0.0M;
 
-            _sender = new User.User("Sender", "SenderPass", senderInitialBalance);
-            _recipient = new User.User("Recipient", "RecipientPass", recipientInitialBalance);
+            _sender = new User("Sender", "SenderPass", senderInitialBalance);
+            _recipient = new User("Recipient", "RecipientPass", recipientInitialBalance);
         }
 
         [TestMethod]

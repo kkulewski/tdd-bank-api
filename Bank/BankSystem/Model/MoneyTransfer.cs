@@ -1,7 +1,6 @@
 ﻿using System;
-using BankSystem.User;
 
-namespace BankSystem.Account
+namespace BankSystem.Model
 {
     public class MoneyTransfer : IMoneyTransfer
     {

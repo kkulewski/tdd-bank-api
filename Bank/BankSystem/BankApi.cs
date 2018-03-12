@@ -1,7 +1,7 @@
 ﻿using System;
 using BankSystem.Account;
 using BankSystem.Authentication;
-using BankSystem.User;
+using BankSystem.Storage;
 
 namespace BankSystem
 {

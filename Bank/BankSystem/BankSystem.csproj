@@ -43,15 +43,15 @@
     <Compile Include="Account\AccountOperationException.cs" />
     <Compile Include="Account\AccountService.cs" />
     <Compile Include="Account\IAccountService.cs" />
-    <Compile Include="Account\IMoneyTransfer.cs" />
-    <Compile Include="Account\MoneyTransfer.cs" />
+    <Compile Include="Model\IMoneyTransfer.cs" />
+    <Compile Include="Model\MoneyTransfer.cs" />
     <Compile Include="Authentication\AuthenticationService.cs" />
     <Compile Include="Authentication\IAuthenticationService.cs" />
     <Compile Include="BankApi.cs" />
-    <Compile Include="User\IUser.cs" />
+    <Compile Include="Model\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User\IUserStore.cs" />
-    <Compile Include="User\User.cs" />
+    <Compile Include="Storage\IUserStore.cs" />
+    <Compile Include="Model\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

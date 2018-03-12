@@ -1,4 +1,6 @@
-﻿namespace BankSystem.User
+﻿using BankSystem.Model;
+
+namespace BankSystem.Storage
 {
     public interface IUserStore
     {
