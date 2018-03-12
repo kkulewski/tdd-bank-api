@@ -147,5 +147,53 @@ namespace BankSystem.Tests
 
             Assert.AreEqual(transferCountBeforeNewTransfer + 1, sender.PendingTransfers.Count);
         }
+
+        [TestMethod]
+        public void CreateMoneyTransfer_AddsTransferWithCorrectSender_ToSenderPendingTransfers()
+        {
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+            var transferAmount = 100.0M;
+
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
+
+            Assert.AreEqual(sender, transfer.Sender);
+        }
+
+        [TestMethod]
+        public void CreateMoneyTransfer_AddsTransferWithCorrectRecipient_ToSenderPendingTransfers()
+        {
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+            var transferAmount = 100.0M;
+
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
+
+            Assert.AreEqual(recipient, transfer.Recipient);
+        }
+
+        [TestMethod]
+        public void CreateMoneyTransfer_AddsTransferWithCorrectAmount_ToSenderPendingTransfers()
+        {
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+            var transferAmount = 100.0M;
+
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
+
+            Assert.AreEqual(transferAmount, transfer.Amount);
+        }
     }
 }
