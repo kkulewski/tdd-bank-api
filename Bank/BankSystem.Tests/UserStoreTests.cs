@@ -25,10 +25,26 @@ namespace BankSystem.Tests
         {
             // ARRANGE
             IUserStore userStore = new InMemoryUserStore();
+            var user = new User("someLogin", "somePassword", 0.0M);
 
             // ACT
-            var user = new User("someLogin", "somePassword", 0.0M);
             var result = userStore.Add(user);
+
+            // ASSERT
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Add_ReturnsTrue_WhenAddingToNonEmptyList()
+        {
+            // ARRANGE
+            IUserStore userStore = new InMemoryUserStore();
+            var user1 = new User("someLogin", "somePassword", 0.0M);
+            var user2 = new User("otherLogin", "otherPassword", 0.0M);
+
+            // ACT
+            userStore.Add(user1);
+            var result = userStore.Add(user2);
 
             // ASSERT
             Assert.IsTrue(result);
