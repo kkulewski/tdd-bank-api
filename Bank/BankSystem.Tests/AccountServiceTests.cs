@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BankSystem.Account;
 using BankSystem.User;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -60,6 +61,7 @@ namespace BankSystem.Tests
 
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
+            senderMock.Setup(x => x.PendingTransfers).Returns(new List<IMoneyTransfer>());
             var recipientMock = new Mock<IUser>();
 
             IAccountService accountService = new AccountService();
@@ -124,6 +126,7 @@ namespace BankSystem.Tests
 
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
+            senderMock.Setup(x => x.PendingTransfers).Returns(new List<IMoneyTransfer>());
             var recipientMock = new Mock<IUser>();
 
             IAccountService accountService = new AccountService();
@@ -148,6 +151,23 @@ namespace BankSystem.Tests
 
             var recipientExpectedBalance = recipientInitialBalance + transferAmount;
             Assert.AreEqual(recipientExpectedBalance, recipient.Balance);
+        }
+
+        [TestMethod]
+        public void CreateMoneyTransfer_AddsNewTransfer_ToSenderPendingTransfers()
+        {
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+            var transferAmount = 100.0M;
+
+            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+
+            IAccountService accountService = new AccountService();
+            var transferCountBeforeNewTransfer = sender.PendingTransfers.Count;
+            var _ = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
+
+            Assert.AreEqual(transferCountBeforeNewTransfer + 1, sender.PendingTransfers.Count);
         }
     }
 }
