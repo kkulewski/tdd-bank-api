@@ -1,8 +1,8 @@
 using System;
-using BankSystem.Account;
-using BankSystem.Authentication;
-using BankSystem.Model;
-using BankSystem.Storage;
+using BankSystem.DAL;
+using BankSystem.Models;
+using BankSystem.Services.Account;
+using BankSystem.Services.Authentication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

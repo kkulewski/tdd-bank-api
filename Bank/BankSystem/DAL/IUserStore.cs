@@ -1,6 +1,6 @@
-﻿using BankSystem.Model;
+﻿using BankSystem.Models;
 
-namespace BankSystem.Storage
+namespace BankSystem.DAL
 {
     public interface IUserStore
     {

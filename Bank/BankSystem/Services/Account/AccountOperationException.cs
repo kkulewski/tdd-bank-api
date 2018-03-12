@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankSystem.Account
+namespace BankSystem.Services.Account
 {
     public class AccountOperationException : Exception
     {

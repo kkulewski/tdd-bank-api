@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankSystem.Model
+namespace BankSystem.Models
 {
     public class MoneyTransfer : IMoneyTransfer
     {

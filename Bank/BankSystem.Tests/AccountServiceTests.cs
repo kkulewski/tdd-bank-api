@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using BankSystem.Account;
-using BankSystem.Model;
+using BankSystem.Models;
+using BankSystem.Services.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 

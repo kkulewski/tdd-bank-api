@@ -1,7 +1,7 @@
-﻿using BankSystem.Model;
-using BankSystem.Storage;
+﻿using BankSystem.DAL;
+using BankSystem.Models;
 
-namespace BankSystem.Authentication
+namespace BankSystem.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {

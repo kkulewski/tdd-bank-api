@@ -1,6 +1,6 @@
-﻿using BankSystem.Model;
+﻿using BankSystem.Models;
 
-namespace BankSystem.Authentication
+namespace BankSystem.Services.Authentication
 {
     public interface IAuthenticationService
     {

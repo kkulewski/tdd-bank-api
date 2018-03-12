@@ -1,6 +1,6 @@
-﻿using BankSystem.Model;
+﻿using BankSystem.Models;
 
-namespace BankSystem.Account
+namespace BankSystem.Services.Account
 {
     public interface IAccountService
     {

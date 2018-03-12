@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BankSystem.Model
+namespace BankSystem.Models
 {
     public interface IUser
     {

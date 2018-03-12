@@ -40,18 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\AccountOperationException.cs" />
-    <Compile Include="Account\AccountService.cs" />
-    <Compile Include="Account\IAccountService.cs" />
-    <Compile Include="Model\IMoneyTransfer.cs" />
-    <Compile Include="Model\MoneyTransfer.cs" />
-    <Compile Include="Authentication\AuthenticationService.cs" />
-    <Compile Include="Authentication\IAuthenticationService.cs" />
+    <Compile Include="Services\Account\AccountOperationException.cs" />
+    <Compile Include="Services\Account\AccountService.cs" />
+    <Compile Include="Services\Account\IAccountService.cs" />
+    <Compile Include="Models\IMoneyTransfer.cs" />
+    <Compile Include="Models\MoneyTransfer.cs" />
+    <Compile Include="Services\Authentication\AuthenticationService.cs" />
+    <Compile Include="Services\Authentication\IAuthenticationService.cs" />
     <Compile Include="BankApi.cs" />
-    <Compile Include="Model\IUser.cs" />
+    <Compile Include="Models\IUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Storage\IUserStore.cs" />
-    <Compile Include="Model\User.cs" />
+    <Compile Include="DAL\IUserStore.cs" />
+    <Compile Include="Models\User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
