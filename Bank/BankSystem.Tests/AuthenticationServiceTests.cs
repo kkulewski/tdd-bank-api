@@ -157,14 +157,17 @@ namespace BankSystem.Tests
         }
 
         [TestMethod]
-        public void SignUp_ReturnsTrue_WhenUserWithGivenLoginDoesNotExist()
+        public void SignUp_ReturnsTrue_WhenUserSuccessfullySignedUp()
         {
             // ARRANGE
             var login = "otherLogin";
             var password = "otherPassword";
+            var userMock = new Mock<IUser>();
+            userMock.Setup(x => x.Login).Returns(login);
+            userMock.Setup(x => x.Password).Returns(password);
 
             var userFactoryMock = new Mock<IUserFactory>();
-            userFactoryMock.Setup(x => x.Create(login, password)).Returns((IUser) null);
+            userFactoryMock.Setup(x => x.Create(login, password)).Returns(userMock.Object);
 
             var userStoreMock = new Mock<IUserStore>();
             userStoreMock.Setup(x => x.GetUserByLogin(login)).Returns((IUser) null);
