@@ -7,14 +7,25 @@ namespace BankSystem.Tests
     [TestClass]
     public class UserStoreTests
     {
+        private IUserStore _userStore;
+        private IUser _someUser;
+        private IUser _otherUser;
+        private IUser _someUserDuplicate;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _userStore = new InMemoryUserStore();
+            _someUser = new User("someLogin", "somePassword", 0.0M);
+            _otherUser = new User("otherLogin", "otherPassword", 0.0M);
+            _someUserDuplicate = new User("someLogin", "somePassword", 0.0M);
+        }
+
         [TestMethod]
         public void GetUserByLogin_ReturnsNull_WhenUserListIsEmpty()
         {
-            // ARRANGE
-            IUserStore userStore = new InMemoryUserStore();
-
             // ACT
-            var user = userStore.GetUserByLogin("someLogin");
+            var user = _userStore.GetUserByLogin("someLogin");
 
             // ASSERT
             Assert.IsNull(user);
@@ -23,12 +34,8 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Add_ReturnsTrue_WhenAddingUserToEmptyList()
         {
-            // ARRANGE
-            IUserStore userStore = new InMemoryUserStore();
-            var user = new User("someLogin", "somePassword", 0.0M);
-
             // ACT
-            var result = userStore.Add(user);
+            var result = _userStore.Add(_someUser);
 
             // ASSERT
             Assert.IsTrue(result);
@@ -37,14 +44,9 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Add_ReturnsTrue_WhenAddingToNonEmptyList()
         {
-            // ARRANGE
-            IUserStore userStore = new InMemoryUserStore();
-            var user1 = new User("someLogin", "somePassword", 0.0M);
-            var user2 = new User("otherLogin", "otherPassword", 0.0M);
-
             // ACT
-            userStore.Add(user1);
-            var result = userStore.Add(user2);
+            _userStore.Add(_someUser);
+            var result = _userStore.Add(_otherUser);
 
             // ASSERT
             Assert.IsTrue(result);
