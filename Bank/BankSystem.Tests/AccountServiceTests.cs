@@ -10,190 +10,191 @@ namespace BankSystem.Tests
     [TestClass]
     public class AccountServiceTests
     {
+        private IAccountService _accountService;
+        private decimal _defaultTransferAmount;
+        private IUser _senderDouble;
+        private IUser _recipientDouble;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _accountService = new AccountService();
+
+            _defaultTransferAmount = 100.0M;
+            var senderInitialBalance = 100.0M;
+            var recipientInitialBalance = 0.0M;
+
+            _senderDouble = new FakeUser("Sender", "SenderPass", senderInitialBalance);
+            _recipientDouble = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+        }
+
         [TestMethod]
         public void GetBalance_ReturnsUserBalance()
         {
-            decimal userBalance = 1000.0M;
-
+            // ARRANGE
+            decimal expectedBalance = 1000.0M;
             var userMock = new Mock<IUser>();
-            userMock.Setup(x => x.Balance).Returns(userBalance);
+            userMock.Setup(x => x.Balance).Returns(expectedBalance);
             IUser user = userMock.Object;
 
-            IAccountService accountService = new AccountService();
+            // ACT
+            decimal balance = _accountService.GetBalance(user);
 
-            Assert.AreEqual(userBalance, accountService.GetBalance(user));
+            // ASSERT
+            Assert.AreEqual(expectedBalance, balance);
         }
 
         [TestMethod]
         [ExpectedException(typeof(AccountOperationException))]
         public void CreateMoneyTransfer_Throws_WhenAmountInvalid()
         {
+            // ARRANGE
             var invalidAmount = -100.0M;
             var senderMock = new Mock<IUser>();
             var recipientMock = new Mock<IUser>();
 
-            IAccountService accountService = new AccountService();
+            // ACT
+            var transfer = _accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, invalidAmount);
 
-            Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, invalidAmount));
+            // ASSERT
+            Assert.IsNotNull(transfer);
         }
 
         [TestMethod]
         [ExpectedException(typeof(AccountOperationException))]
         public void CreateMoneyTransfer_Throws_WhenSenderBalanceIsLowerThanTransferAmount()
         {
+            // ARRANGE
             var validAmount = 100.0M;
             var senderBalance = 50.0M;
-
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
-
             var recipientMock = new Mock<IUser>();
-            IAccountService accountService = new AccountService();
 
-            Assert.IsNotNull(accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, validAmount));
+            // ACT
+            var transfer = _accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, validAmount);
+
+            // ASSERT
+            Assert.IsNotNull(transfer);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_CreatesMoneyTransfer_WithCorrectAmount()
         {
+            // ARRANGE
             var amount = 100.0M;
             var senderBalance = amount;
-
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
             senderMock.Setup(x => x.PendingTransfers).Returns(new List<IMoneyTransfer>());
             var recipientMock = new Mock<IUser>();
 
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+            // ACT
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
 
+            // ASSERT
             Assert.AreEqual(amount, transfer.Amount);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_SubtractsCorrectAmount_FromSenderBalance()
         {
-            var senderInitialBalance = 200.0M;
-            var transferAmount = 100.0M;
+            // ARRANGE
+            var senderInitialBalance = _senderDouble.Balance;
+            
+            // ACT
+            _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            var recipientMock = new Mock<IUser>();
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-
-            IAccountService accountService = new AccountService();
-            var _ = accountService.CreateMoneyTransfer(sender, recipientMock.Object, transferAmount);
-
-            var senderExpectedBalance = senderInitialBalance - transferAmount;
-            Assert.AreEqual(senderExpectedBalance, sender.Balance);
+            // ASSERT
+            Assert.AreEqual(senderInitialBalance - _defaultTransferAmount, _senderDouble.Balance);
         }
 
         [TestMethod]
         public void ExecuteMoneyTransfer_ReturnsFalse_WhenTransferIsAlreadyCompleted()
         {
+            // ARRANGE
             var transferMock = new Mock<IMoneyTransfer>();
             transferMock.Setup(x => x.Completed).Returns(true);
+            
+            // ACT
+            var result = _accountService.ExecuteMoneyTransfer(transferMock.Object);
 
-            IAccountService accountService = new AccountService();
-            Assert.IsFalse(accountService.ExecuteMoneyTransfer(transferMock.Object));
+            // ASSERT
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void ExecuteMoneyTransfer_ReturnsTrue_WhenTransferSucceeded()
         {
+            // ARRANGE
             var amount = 100.0M;
             var senderBalance = amount;
-
             var senderMock = new Mock<IUser>();
             senderMock.Setup(x => x.Balance).Returns(senderBalance);
             senderMock.Setup(x => x.PendingTransfers).Returns(new List<IMoneyTransfer>());
             var recipientMock = new Mock<IUser>();
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
 
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(senderMock.Object, recipientMock.Object, amount);
+            // ACT
+            var result = _accountService.ExecuteMoneyTransfer(transfer);
 
-            Assert.IsTrue(accountService.ExecuteMoneyTransfer(transfer));
+            // ASSERT
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void ExecuteMoneyTransfer_AddsCorrectAmount_ToRecipientBalance()
         {
-            var senderInitialBalance = 100.0M;
-            var recipientInitialBalance = 0.0M;
-            var transferAmount = 100.0M;
+            // ARRANGE
+            var recipientInitialBalance = _recipientDouble.Balance;
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
+            // ACT
+            _accountService.ExecuteMoneyTransfer(transfer);
 
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
-            accountService.ExecuteMoneyTransfer(transfer);
-
-            var recipientExpectedBalance = recipientInitialBalance + transferAmount;
-            Assert.AreEqual(recipientExpectedBalance, recipient.Balance);
+            // ASSERT
+            Assert.AreEqual(recipientInitialBalance + _defaultTransferAmount, _recipientDouble.Balance);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsNewTransfer_ToSenderPendingTransfers()
         {
-            var senderInitialBalance = 100.0M;
-            var recipientInitialBalance = 0.0M;
-            var transferAmount = 100.0M;
+            // ACT
+            var transferCountBeforeNewTransfer = _senderDouble.PendingTransfers.Count;
+            var _ = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
-
-            IAccountService accountService = new AccountService();
-            var transferCountBeforeNewTransfer = sender.PendingTransfers.Count;
-            var _ = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
-
-            Assert.AreEqual(transferCountBeforeNewTransfer + 1, sender.PendingTransfers.Count);
+            // ASSERT
+            Assert.AreEqual(transferCountBeforeNewTransfer + 1, _senderDouble.PendingTransfers.Count);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectSender_ToSenderPendingTransfers()
-        {
-            var senderInitialBalance = 100.0M;
-            var recipientInitialBalance = 0.0M;
-            var transferAmount = 100.0M;
+        {   
+            // ACT
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
-
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
-
-            Assert.AreEqual(sender, transfer.Sender);
+            // ASSERT
+            Assert.AreEqual(_senderDouble, transfer.Sender);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectRecipient_ToSenderPendingTransfers()
-        {
-            var senderInitialBalance = 100.0M;
-            var recipientInitialBalance = 0.0M;
-            var transferAmount = 100.0M;
+        {   
+            // ACT
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
-
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
-
-            Assert.AreEqual(recipient, transfer.Recipient);
+            // ASSERT
+            Assert.AreEqual(_recipientDouble, transfer.Recipient);
         }
 
         [TestMethod]
         public void CreateMoneyTransfer_AddsTransferWithCorrectAmount_ToSenderPendingTransfers()
         {
-            var senderInitialBalance = 100.0M;
-            var recipientInitialBalance = 0.0M;
-            var transferAmount = 100.0M;
+            // ACT
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
-            IUser sender = new FakeUser("Sender", "SenderPass", senderInitialBalance);
-            IUser recipient = new FakeUser("Recipient", "RecipientPass", recipientInitialBalance);
-
-            IAccountService accountService = new AccountService();
-            IMoneyTransfer transfer = accountService.CreateMoneyTransfer(sender, recipient, transferAmount);
-
-            Assert.AreEqual(transferAmount, transfer.Amount);
+            // ASSERT
+            Assert.AreEqual(_defaultTransferAmount, transfer.Amount);
         }
     }
 }
