@@ -143,7 +143,7 @@ namespace BankSystem.Tests
         }
 
         [TestMethod]
-        public void SignUp_ReturnsFalse_WhenWithGivenLoginAlreadyExists()
+        public void SignUp_ReturnsFalse_WhenUserWithGivenLoginAlreadyExists()
         {
             // ARRANGE
             var duplicateLogin = _userMock.Login;
@@ -154,6 +154,29 @@ namespace BankSystem.Tests
 
             // ASSERT
             Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SignUp_ReturnsTrue_WhenUserWithGivenLoginDoesNotExist()
+        {
+            // ARRANGE
+            var login = "otherLogin";
+            var password = "otherPassword";
+
+            var userFactoryMock = new Mock<IUserFactory>();
+            userFactoryMock.Setup(x => x.Create(login, password)).Returns((IUser) null);
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(login)).Returns((IUser) null);
+            userStoreMock.Setup(x => x.Add(It.IsAny<IUser>())).Returns(true);
+
+            var authService = new AuthenticationService(userStoreMock.Object, userFactoryMock.Object);
+
+            // ACT
+            bool result = authService.SignUp(login, password);
+
+            // ASSERT
+            Assert.IsTrue(result);
         }
     }
 }

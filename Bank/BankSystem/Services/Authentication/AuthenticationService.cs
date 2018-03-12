@@ -56,8 +56,9 @@ namespace BankSystem.Services.Authentication
             {
                 return false;
             }
-            
-            throw new NotImplementedException();
+
+            var user = _userFactory.Create(login, password);
+            return _userStore.Add(user);
         }
     }
 }
