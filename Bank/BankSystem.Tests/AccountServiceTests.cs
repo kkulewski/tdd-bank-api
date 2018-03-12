@@ -159,9 +159,11 @@ namespace BankSystem.Tests
         [TestMethod]
         public void CreateMoneyTransfer_AddsNewTransfer_ToSenderPendingTransfers()
         {
-            // ACT
+            // ARRANGE
             var transferCountBeforeNewTransfer = _senderDouble.PendingTransfers.Count;
-            var _ = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+
+            // ACT
+            _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
 
             // ASSERT
             Assert.AreEqual(transferCountBeforeNewTransfer + 1, _senderDouble.PendingTransfers.Count);

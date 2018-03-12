@@ -157,7 +157,6 @@ namespace BankSystem.Tests
         {
             // ARRANGE
             var userMock = new Mock<IUser>();
-
             var authServiceMock = new Mock<IAuthenticationService>();
 
             authServiceMock
@@ -169,13 +168,11 @@ namespace BankSystem.Tests
                 .Returns(userMock.Object);
 
             var userStoreMock = new Mock<IUserStore>();
-
             userStoreMock
                 .Setup(x => x.GetUserByLogin(It.IsAny<string>()))
                 .Returns(userMock.Object);
 
             var moneyTransferMock = new Mock<IMoneyTransfer>();
-
             var accountServiceMock = new Mock<IAccountService>();
 
             accountServiceMock
