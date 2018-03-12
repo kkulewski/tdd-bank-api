@@ -6,12 +6,14 @@ namespace BankSystem.Services.Authentication
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IUserStore _userStore;
+        private readonly IUserFactory _userFactory;
 
         public IUser SignedUser { get; private set; }
 
-        public AuthenticationService(IUserStore userStore)
+        public AuthenticationService(IUserStore userStore, IUserFactory userFactory)
         {
             _userStore = userStore;
+            _userFactory = userFactory;
         }
 
         public bool IsAuthenticated()

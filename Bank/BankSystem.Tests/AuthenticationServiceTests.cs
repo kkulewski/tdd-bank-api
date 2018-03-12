@@ -36,6 +36,7 @@ namespace BankSystem.Tests
             var userStoreMock = new Mock<IUserStore>();
             userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_userMock);
             _authServiceWithMockUserStore = new AuthenticationService(userStoreMock.Object);
+            var userFactoryMock = new Mock<IUserFactory>();
         }
 
         [TestMethod]
