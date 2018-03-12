@@ -15,6 +15,8 @@ namespace BankSystem.Tests
         private string _testUserInvalidPassword;
 
         private IUser _testUserDouble;
+        private IAuthenticationService _authServiceWithMockUserStore;
+
 
         [TestInitialize]
         public void Initialize()
@@ -29,17 +31,17 @@ namespace BankSystem.Tests
             userMock.Setup(x => x.Login).Returns(_testUserValidLogin);
             userMock.Setup(x => x.Password).Returns(_testUserValidPassword);
             _testUserDouble = userMock.Object;
+
+            var userStoreMock = new Mock<IUserStore>();
+            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
+            _authServiceWithMockUserStore = new AuthenticationService(userStoreMock.Object);
         }
 
         [TestMethod]
         public void IsAuthenticated_ReturnsFalse_WhenThereWasNoAttemptToAuthenticateYet()
         {
-            // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
-
             // ACT
-            var result = authService.IsAuthenticated();
+            var result = _authServiceWithMockUserStore.IsAuthenticated();
 
             // ASSERT
             Assert.IsFalse(result);
@@ -48,13 +50,8 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Authenticate_ReturnsTrue_WhenUserSuccessfullyAuthenticated()
         {
-            // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
-
             // ACT
-            bool authResult = authService.Authenticate(_testUserValidLogin, _testUserValidPassword);
+            bool authResult = _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserValidPassword);
 
             // ASSERT
             Assert.IsTrue(authResult);
@@ -63,13 +60,8 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Authenticate_ReturnsFalse_WhenUserAuthenticates_WithIncorrectPassword()
         {
-            // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
-
             // ACT
-            bool authResult = authService.Authenticate(_testUserValidLogin, _testUserInvalidPassword);
+            bool authResult = _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserInvalidPassword);
 
             // ASSERT
             Assert.IsFalse(authResult);
@@ -78,13 +70,8 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Authenticate_ReturnsFalse_WhenSpecifiedUserDoesNotExists()
         {
-            // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
-
             // ACT
-            bool authResult = authService.Authenticate(_testUserInvalidLogin, _testUserInvalidPassword);
+            bool authResult = _authServiceWithMockUserStore.Authenticate(_testUserInvalidLogin, _testUserInvalidPassword);
 
             // ASSERT
             Assert.IsFalse(authResult);
@@ -94,13 +81,10 @@ namespace BankSystem.Tests
         public void IsAuthenticated_ReturnsTrue_WhenUserSuccessfullyAuthenticated()
         {
             // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserValidPassword);
 
             // ACT
-            authService.Authenticate(_testUserValidLogin, _testUserValidPassword);
-            bool authResult = authService.IsAuthenticated();
+            bool authResult = _authServiceWithMockUserStore.IsAuthenticated();
 
             // ASSERT
             Assert.IsTrue(authResult);
@@ -110,13 +94,10 @@ namespace BankSystem.Tests
         public void IsAuthenticated_ReturnsFalse_WhenUserAuthenticationFailed()
         {
             // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserInvalidPassword);
 
             // ACT
-            authService.Authenticate(_testUserValidLogin, _testUserInvalidPassword);
-            bool authResult = authService.IsAuthenticated();
+            bool authResult = _authServiceWithMockUserStore.IsAuthenticated();
 
             // ASSERT
             Assert.IsFalse(authResult);
@@ -125,12 +106,8 @@ namespace BankSystem.Tests
         [TestMethod]
         public void Deauthenticate_ReturnsFalse_WhenNoUserIsAuthenticated()
         {
-            // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
-
             //ACT
-            bool result = authService.Deauthenticate();
+            bool result = _authServiceWithMockUserStore.Deauthenticate();
 
             // ASSERT
             Assert.IsFalse(result);
@@ -140,13 +117,10 @@ namespace BankSystem.Tests
         public void Deauthenticate_ReturnsTrue_WhenDeauthenticationSucceeds_WithAuthenticatedUser()
         {
             // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserValidPassword);
 
             // ACT
-            authService.Authenticate(_testUserValidLogin, _testUserValidPassword);
-            bool result = authService.Deauthenticate();
+            bool result = _authServiceWithMockUserStore.Deauthenticate();
 
             // ASSERT
             Assert.IsTrue(result);
@@ -156,14 +130,11 @@ namespace BankSystem.Tests
         public void IsAuthenticated_ReturnsFalse_AfterSuccessfullDeauthentication()
         {
             // ARRANGE
-            var userStoreMock = new Mock<IUserStore>();
-            userStoreMock.Setup(x => x.GetUserByLogin(_testUserValidLogin)).Returns(_testUserDouble);
-            IAuthenticationService authService = new AuthenticationService(userStoreMock.Object);
+            _authServiceWithMockUserStore.Authenticate(_testUserValidLogin, _testUserValidPassword);
+            _authServiceWithMockUserStore.Deauthenticate();
 
             // ACT
-            authService.Authenticate(_testUserValidLogin, _testUserValidPassword);
-            authService.Deauthenticate();
-            bool result = authService.IsAuthenticated();
+            bool result = _authServiceWithMockUserStore.IsAuthenticated();
 
             // ASSERT
             Assert.IsFalse(result);
