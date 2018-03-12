@@ -198,5 +198,19 @@ namespace BankSystem.Tests
             // ASSERT
             Assert.AreEqual(_defaultTransferAmount, transfer.Amount);
         }
+
+        [TestMethod]
+        public void ExecuteMoneyTransfer_RemovesTransfer_FromSenderPendingTransfers()
+        {
+            // ARRANGE
+            IMoneyTransfer transfer = _accountService.CreateMoneyTransfer(_senderDouble, _recipientDouble, _defaultTransferAmount);
+            
+            // ACT
+            _accountService.ExecuteMoneyTransfer(transfer);
+            var transferInSenderPendingTransfers = _senderDouble.PendingTransfers.Contains(transfer);
+
+            // ASSERT
+            Assert.IsFalse(transferInSenderPendingTransfers);
+        }
     }
 }

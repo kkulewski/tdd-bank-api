@@ -39,6 +39,7 @@ namespace BankSystem.Account
 
             transfer.Recipient.Balance += transfer.Amount;
             transfer.SetCompleted();
+            transfer.Sender.PendingTransfers.Remove(transfer);
             return true;
         }
     }
