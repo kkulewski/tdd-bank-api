@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankSystem.Tests", "BankSys
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostApp", "HostApp\HostApp.csproj", "{4A71B1BA-3393-4094-8C0C-123A3F458A60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSTests", "MSTests\MSTests.csproj", "{24169BE0-BEE5-4276-8B49-445CE4141131}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4A71B1BA-3393-4094-8C0C-123A3F458A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A71B1BA-3393-4094-8C0C-123A3F458A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A71B1BA-3393-4094-8C0C-123A3F458A60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24169BE0-BEE5-4276-8B49-445CE4141131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24169BE0-BEE5-4276-8B49-445CE4141131}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24169BE0-BEE5-4276-8B49-445CE4141131}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24169BE0-BEE5-4276-8B49-445CE4141131}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

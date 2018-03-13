@@ -1,0 +1,797 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BankSystem.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:BankSystem.DAL.Fakes.ShimInMemoryUserStore">
+            <summary>Shim type of BankSystem.DAL.InMemoryUserStore</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.ShimInMemoryUserStore.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.ShimInMemoryUserStore.#ctor(BankSystem.DAL.InMemoryUserStore)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.AddIUser">
+            <summary>Sets the shim of InMemoryUserStore.Add(IUser user)</summary>
+        </member>
+        <member name="T:BankSystem.DAL.Fakes.ShimInMemoryUserStore.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.AllInstances.AddIUser">
+            <summary>Sets the shim of InMemoryUserStore.Add(IUser user)</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.AllInstances.GetUserByLoginString">
+            <summary>Sets the shim of InMemoryUserStore.GetUserByLogin(String login)</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.ShimInMemoryUserStore.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.ShimInMemoryUserStore.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.ShimInMemoryUserStore.Bind(BankSystem.DAL.IUserStore)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.Constructor">
+            <summary>Sets the shim of InMemoryUserStore.InMemoryUserStore()</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.ShimInMemoryUserStore.GetUserByLoginString">
+            <summary>Sets the shim of InMemoryUserStore.GetUserByLogin(String login)</summary>
+        </member>
+        <member name="T:BankSystem.DAL.Fakes.StubIUserStore">
+            <summary>Stub type of BankSystem.DAL.IUserStore</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.StubIUserStore.#ctor">
+            <summary>Initializes a new instance of type StubIUserStore</summary>
+        </member>
+        <member name="F:BankSystem.DAL.Fakes.StubIUserStore.AddIUser">
+            <summary>Sets the stub of IUserStore.Add(IUser user)</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.StubIUserStore.BankSystem#DAL#IUserStore#Add(BankSystem.Models.IUser)">
+            <summary>Sets the stub of IUserStore.Add(IUser user)</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.StubIUserStore.BankSystem#DAL#IUserStore#GetUserByLogin(System.String)">
+            <summary>Sets the stub of IUserStore.GetUserByLogin(String login)</summary>
+        </member>
+        <member name="F:BankSystem.DAL.Fakes.StubIUserStore.GetUserByLoginString">
+            <summary>Sets the stub of IUserStore.GetUserByLogin(String login)</summary>
+        </member>
+        <member name="T:BankSystem.DAL.Fakes.StubInMemoryUserStore">
+            <summary>Stub type of BankSystem.DAL.InMemoryUserStore</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.StubInMemoryUserStore.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.StubInMemoryUserStore.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.DAL.Fakes.StubInMemoryUserStore.InitializeStub">
+            <summary>Initializes a new instance of type StubInMemoryUserStore</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.StubInMemoryUserStore.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.DAL.Fakes.StubInMemoryUserStore.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Fakes.ShimBankApi">
+            <summary>Shim type of BankSystem.BankApi</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.ShimBankApi.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.ShimBankApi.#ctor(BankSystem.BankApi)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Fakes.ShimBankApi.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.AllInstances.GetMyAccountBalance">
+            <summary>Sets the shim of BankApi.GetMyAccountBalance()</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.AllInstances.SendMoneyTransferStringDecimal">
+            <summary>Sets the shim of BankApi.SendMoneyTransfer(String recipientLogin, Decimal amount)</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.AllInstances.SignInStringString">
+            <summary>Sets the shim of BankApi.SignIn(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.AllInstances.SignOut">
+            <summary>Sets the shim of BankApi.SignOut()</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.AllInstances.SignUpStringString">
+            <summary>Sets the shim of BankApi.SignUp(String login, String password)</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.ShimBankApi.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.ShimBankApi.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.ConstructorIAuthenticationServiceIAccountServiceIUserStore">
+            <summary>Sets the shim of BankApi.BankApi(IAuthenticationService authenticationService, IAccountService accountService, IUserStore userStore)</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.GetMyAccountBalance">
+            <summary>Sets the shim of BankApi.GetMyAccountBalance()</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.SendMoneyTransferStringDecimal">
+            <summary>Sets the shim of BankApi.SendMoneyTransfer(String recipientLogin, Decimal amount)</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.SignInStringString">
+            <summary>Sets the shim of BankApi.SignIn(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.SignOut">
+            <summary>Sets the shim of BankApi.SignOut()</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.ShimBankApi.SignUpStringString">
+            <summary>Sets the shim of BankApi.SignUp(String login, String password)</summary>
+        </member>
+        <member name="T:BankSystem.Fakes.StubBankApi">
+            <summary>Stub type of BankSystem.BankApi</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.StubBankApi.#ctor(BankSystem.Services.Authentication.IAuthenticationService,BankSystem.Services.Account.IAccountService,BankSystem.DAL.IUserStore)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.StubBankApi.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Fakes.StubBankApi.InitializeStub">
+            <summary>Initializes a new instance of type StubBankApi</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.StubBankApi.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Fakes.StubBankApi.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimMoneyTransfer">
+            <summary>Shim type of BankSystem.Models.MoneyTransfer</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimMoneyTransfer.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimMoneyTransfer.#ctor(BankSystem.Models.MoneyTransfer)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.AmountGet">
+            <summary>Sets the shim of MoneyTransfer.get_Amount()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.CompletedGet">
+            <summary>Sets the shim of MoneyTransfer.get_Completed()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.CompletedOnGet">
+            <summary>Sets the shim of MoneyTransfer.get_CompletedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.CompletedOnSetDateTime">
+            <summary>Sets the shim of MoneyTransfer.set_CompletedOn(DateTime value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.CompletedSetBoolean">
+            <summary>Sets the shim of MoneyTransfer.set_Completed(Boolean value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.CreatedOnGet">
+            <summary>Sets the shim of MoneyTransfer.get_CreatedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.RecipientGet">
+            <summary>Sets the shim of MoneyTransfer.get_Recipient()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.SenderGet">
+            <summary>Sets the shim of MoneyTransfer.get_Sender()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AllInstances.SetCompleted">
+            <summary>Sets the shim of MoneyTransfer.SetCompleted()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.AmountGet">
+            <summary>Sets the shim of MoneyTransfer.get_Amount()</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimMoneyTransfer.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimMoneyTransfer.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimMoneyTransfer.Bind(BankSystem.Models.IMoneyTransfer)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.CompletedGet">
+            <summary>Sets the shim of MoneyTransfer.get_Completed()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.CompletedOnGet">
+            <summary>Sets the shim of MoneyTransfer.get_CompletedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.CompletedOnSetDateTime">
+            <summary>Sets the shim of MoneyTransfer.set_CompletedOn(DateTime value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.CompletedSetBoolean">
+            <summary>Sets the shim of MoneyTransfer.set_Completed(Boolean value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.ConstructorIUserIUserDecimal">
+            <summary>Sets the shim of MoneyTransfer.MoneyTransfer(IUser sender, IUser recipient, Decimal amount)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.CreatedOnGet">
+            <summary>Sets the shim of MoneyTransfer.get_CreatedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.RecipientGet">
+            <summary>Sets the shim of MoneyTransfer.get_Recipient()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.SenderGet">
+            <summary>Sets the shim of MoneyTransfer.get_Sender()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimMoneyTransfer.SetCompleted">
+            <summary>Sets the shim of MoneyTransfer.SetCompleted()</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimUser">
+            <summary>Shim type of BankSystem.Models.User</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUser.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUser.#ctor(BankSystem.Models.User)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimUser.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.BalanceGet">
+            <summary>Sets the shim of User.get_Balance()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.BalanceSetDecimal">
+            <summary>Sets the shim of User.set_Balance(Decimal value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.CompletedTransfersGet">
+            <summary>Sets the shim of User.get_CompletedTransfers()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.LoginGet">
+            <summary>Sets the shim of User.get_Login()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.PasswordGet">
+            <summary>Sets the shim of User.get_Password()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.AllInstances.PendingTransfersGet">
+            <summary>Sets the shim of User.get_PendingTransfers()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.BalanceGet">
+            <summary>Sets the shim of User.get_Balance()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.BalanceSetDecimal">
+            <summary>Sets the shim of User.set_Balance(Decimal value)</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUser.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUser.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUser.Bind(BankSystem.Models.IUser)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.CompletedTransfersGet">
+            <summary>Sets the shim of User.get_CompletedTransfers()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.ConstructorStringStringDecimal">
+            <summary>Sets the shim of User.User(String login, String password, Decimal balance)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.LoginGet">
+            <summary>Sets the shim of User.get_Login()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.PasswordGet">
+            <summary>Sets the shim of User.get_Password()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUser.PendingTransfersGet">
+            <summary>Sets the shim of User.get_PendingTransfers()</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimUserFactory">
+            <summary>Shim type of BankSystem.Models.UserFactory</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUserFactory.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUserFactory.#ctor(BankSystem.Models.UserFactory)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.ShimUserFactory.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUserFactory.AllInstances.CreateStringString">
+            <summary>Sets the shim of UserFactory.Create(String login, String password)</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUserFactory.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUserFactory.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUserFactory.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.ShimUserFactory.Bind(BankSystem.Models.IUserFactory)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUserFactory.Constructor">
+            <summary>Sets the shim of UserFactory.UserFactory()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.ShimUserFactory.CreateStringString">
+            <summary>Sets the shim of UserFactory.Create(String login, String password)</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubIMoneyTransfer">
+            <summary>Stub type of BankSystem.Models.IMoneyTransfer</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIMoneyTransfer.#ctor">
+            <summary>Initializes a new instance of type StubIMoneyTransfer</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#Amount">
+            <summary>Sets the stub of IMoneyTransfer.get_Amount()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.AmountGet">
+            <summary>Sets the stub of IMoneyTransfer.get_Amount()</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#SetCompleted">
+            <summary>Sets the stub of IMoneyTransfer.SetCompleted()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#Completed">
+            <summary>Sets the stub of IMoneyTransfer.get_Completed()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.CompletedGet">
+            <summary>Sets the stub of IMoneyTransfer.get_Completed()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#CompletedOn">
+            <summary>Sets the stub of IMoneyTransfer.get_CompletedOn()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.CompletedOnGet">
+            <summary>Sets the stub of IMoneyTransfer.get_CompletedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#CreatedOn">
+            <summary>Sets the stub of IMoneyTransfer.get_CreatedOn()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.CreatedOnGet">
+            <summary>Sets the stub of IMoneyTransfer.get_CreatedOn()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#Recipient">
+            <summary>Sets the stub of IMoneyTransfer.get_Recipient()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.RecipientGet">
+            <summary>Sets the stub of IMoneyTransfer.get_Recipient()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIMoneyTransfer.BankSystem#Models#IMoneyTransfer#Sender">
+            <summary>Sets the stub of IMoneyTransfer.get_Sender()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.SenderGet">
+            <summary>Sets the stub of IMoneyTransfer.get_Sender()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIMoneyTransfer.SetCompleted">
+            <summary>Sets the stub of IMoneyTransfer.SetCompleted()</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubIUser">
+            <summary>Stub type of BankSystem.Models.IUser</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIUser.#ctor">
+            <summary>Initializes a new instance of type StubIUser</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIUser.AttachBackingFieldToBalance">
+            <summary>Attaches delegates to emulate StubIUser.Balance as a property with a backing field.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIUser.BankSystem#Models#IUser#Balance">
+            <summary>Sets the stub of IUser.get_Balance()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.BalanceGet">
+            <summary>Sets the stub of IUser.get_Balance()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.BalanceSetDecimal">
+            <summary>Sets the stub of IUser.set_Balance(Decimal value)</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIUser.BankSystem#Models#IUser#CompletedTransfers">
+            <summary>Sets the stub of IUser.get_CompletedTransfers()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.CompletedTransfersGet">
+            <summary>Sets the stub of IUser.get_CompletedTransfers()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIUser.BankSystem#Models#IUser#Login">
+            <summary>Sets the stub of IUser.get_Login()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.LoginGet">
+            <summary>Sets the stub of IUser.get_Login()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIUser.BankSystem#Models#IUser#Password">
+            <summary>Sets the stub of IUser.get_Password()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.PasswordGet">
+            <summary>Sets the stub of IUser.get_Password()</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubIUser.BankSystem#Models#IUser#PendingTransfers">
+            <summary>Sets the stub of IUser.get_PendingTransfers()</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUser.PendingTransfersGet">
+            <summary>Sets the stub of IUser.get_PendingTransfers()</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubIUserFactory">
+            <summary>Stub type of BankSystem.Models.IUserFactory</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIUserFactory.#ctor">
+            <summary>Initializes a new instance of type StubIUserFactory</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubIUserFactory.BankSystem#Models#IUserFactory#Create(System.String,System.String)">
+            <summary>Sets the stub of IUserFactory.Create(String login, String password)</summary>
+        </member>
+        <member name="F:BankSystem.Models.Fakes.StubIUserFactory.CreateStringString">
+            <summary>Sets the stub of IUserFactory.Create(String login, String password)</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubMoneyTransfer">
+            <summary>Stub type of BankSystem.Models.MoneyTransfer</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubMoneyTransfer.#ctor(BankSystem.Models.IUser,BankSystem.Models.IUser,System.Decimal)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubMoneyTransfer.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubMoneyTransfer.InitializeStub">
+            <summary>Initializes a new instance of type StubMoneyTransfer</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubMoneyTransfer.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubMoneyTransfer.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubUser">
+            <summary>Stub type of BankSystem.Models.User</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubUser.#ctor(System.String,System.String,System.Decimal)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUser.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubUser.InitializeStub">
+            <summary>Initializes a new instance of type StubUser</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUser.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUser.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Models.Fakes.StubUserFactory">
+            <summary>Stub type of BankSystem.Models.UserFactory</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubUserFactory.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUserFactory.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Models.Fakes.StubUserFactory.InitializeStub">
+            <summary>Initializes a new instance of type StubUserFactory</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUserFactory.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Models.Fakes.StubUserFactory.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.ShimAccountOperationException">
+            <summary>Shim type of BankSystem.Services.Account.AccountOperationException</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountOperationException.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountOperationException.#ctor(BankSystem.Services.Account.AccountOperationException)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.ShimAccountOperationException.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountOperationException.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountOperationException.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountOperationException.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountOperationException.Bind(System.Runtime.Serialization.ISerializable)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountOperationException.ConstructorString">
+            <summary>Sets the shim of AccountOperationException.AccountOperationException(String message)</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.ShimAccountService">
+            <summary>Shim type of BankSystem.Services.Account.AccountService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountService.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountService.#ctor(BankSystem.Services.Account.AccountService)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.ShimAccountService.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.AllInstances.CreateMoneyTransferIUserIUserDecimal">
+            <summary>Sets the shim of AccountService.CreateMoneyTransfer(IUser sender, IUser recipient, Decimal amount)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.AllInstances.ExecuteMoneyTransferIMoneyTransfer">
+            <summary>Sets the shim of AccountService.ExecuteMoneyTransfer(IMoneyTransfer transfer)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.AllInstances.GetBalanceIUser">
+            <summary>Sets the shim of AccountService.GetBalance(IUser user)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountService.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountService.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.ShimAccountService.Bind(BankSystem.Services.Account.IAccountService)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.Constructor">
+            <summary>Sets the shim of AccountService.AccountService()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.CreateMoneyTransferIUserIUserDecimal">
+            <summary>Sets the shim of AccountService.CreateMoneyTransfer(IUser sender, IUser recipient, Decimal amount)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.ExecuteMoneyTransferIMoneyTransfer">
+            <summary>Sets the shim of AccountService.ExecuteMoneyTransfer(IMoneyTransfer transfer)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.ShimAccountService.GetBalanceIUser">
+            <summary>Sets the shim of AccountService.GetBalance(IUser user)</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.StubAccountOperationException">
+            <summary>Stub type of BankSystem.Services.Account.AccountOperationException</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.#ctor(System.String)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.AttachBackingFieldToHelpLink">
+            <summary>Attaches delegates to emulate StubAccountOperationException.HelpLink as a property with a backing field.</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.AttachBackingFieldToSource">
+            <summary>Attaches delegates to emulate StubAccountOperationException.Source as a property with a backing field.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.Data">
+            <summary>Sets the stub of Exception.get_Data()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.DataGet">
+            <summary>Sets the stub of Exception.get_Data()</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.GetBaseException">
+            <summary>Sets the stub of Exception.GetBaseException()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.GetBaseException01">
+            <summary>Sets the stub of Exception.GetBaseException()</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>Sets the stub of Exception.GetObjectData(SerializationInfo info, StreamingContext context)</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.GetObjectDataSerializationInfoStreamingContext">
+            <summary>Sets the stub of Exception.GetObjectData(SerializationInfo info, StreamingContext context)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.HelpLink">
+            <summary>Sets the stub of Exception.get_HelpLink()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.HelpLinkGet">
+            <summary>Sets the stub of Exception.get_HelpLink()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.HelpLinkSetString">
+            <summary>Sets the stub of Exception.set_HelpLink(String value)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.InitializeStub">
+            <summary>Initializes a new instance of type StubAccountOperationException</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.Message">
+            <summary>Sets the stub of Exception.get_Message()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.MessageGet">
+            <summary>Sets the stub of Exception.get_Message()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.Source">
+            <summary>Sets the stub of Exception.get_Source()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.SourceGet">
+            <summary>Sets the stub of Exception.get_Source()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.SourceSetString">
+            <summary>Sets the stub of Exception.set_Source(String value)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountOperationException.StackTrace">
+            <summary>Sets the stub of Exception.get_StackTrace()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.StackTraceGet">
+            <summary>Sets the stub of Exception.get_StackTrace()</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountOperationException.ToString">
+            <summary>Sets the stub of Exception.ToString()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubAccountOperationException.ToString01">
+            <summary>Sets the stub of Exception.ToString()</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.StubAccountService">
+            <summary>Stub type of BankSystem.Services.Account.AccountService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountService.#ctor">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountService.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubAccountService.InitializeStub">
+            <summary>Initializes a new instance of type StubAccountService</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountService.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Account.Fakes.StubAccountService.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Services.Account.Fakes.StubIAccountService">
+            <summary>Stub type of BankSystem.Services.Account.IAccountService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubIAccountService.#ctor">
+            <summary>Initializes a new instance of type StubIAccountService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubIAccountService.BankSystem#Services#Account#IAccountService#CreateMoneyTransfer(BankSystem.Models.IUser,BankSystem.Models.IUser,System.Decimal)">
+            <summary>Sets the stub of IAccountService.CreateMoneyTransfer(IUser sender, IUser recipient, Decimal amount)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubIAccountService.BankSystem#Services#Account#IAccountService#ExecuteMoneyTransfer(BankSystem.Models.IMoneyTransfer)">
+            <summary>Sets the stub of IAccountService.ExecuteMoneyTransfer(IMoneyTransfer transfer)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Account.Fakes.StubIAccountService.BankSystem#Services#Account#IAccountService#GetBalance(BankSystem.Models.IUser)">
+            <summary>Sets the stub of IAccountService.GetBalance(IUser user)</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubIAccountService.CreateMoneyTransferIUserIUserDecimal">
+            <summary>Sets the stub of IAccountService.CreateMoneyTransfer(IUser sender, IUser recipient, Decimal amount)</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubIAccountService.ExecuteMoneyTransferIMoneyTransfer">
+            <summary>Sets the stub of IAccountService.ExecuteMoneyTransfer(IMoneyTransfer transfer)</summary>
+        </member>
+        <member name="F:BankSystem.Services.Account.Fakes.StubIAccountService.GetBalanceIUser">
+            <summary>Sets the stub of IAccountService.GetBalance(IUser user)</summary>
+        </member>
+        <member name="T:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService">
+            <summary>Shim type of BankSystem.Services.Authentication.AuthenticationService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.#ctor">
+            <summary>Initializes a new shim instance</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.#ctor(BankSystem.Services.Authentication.AuthenticationService)">
+            <summary>Initializes a new shim for the given instance</summary>
+        </member>
+        <member name="T:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances">
+            <summary>Define shims for all instances members</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.AuthenticateStringString">
+            <summary>Sets the shim of AuthenticationService.Authenticate(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.Deauthenticate">
+            <summary>Sets the shim of AuthenticationService.Deauthenticate()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.IsAuthenticated">
+            <summary>Sets the shim of AuthenticationService.IsAuthenticated()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.SignUpStringString">
+            <summary>Sets the shim of AuthenticationService.SignUp(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.SignedUserGet">
+            <summary>Sets the shim of AuthenticationService.get_SignedUser()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AllInstances.SignedUserSetIUser">
+            <summary>Sets the shim of AuthenticationService.set_SignedUser(IUser value)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.AuthenticateStringString">
+            <summary>Sets the shim of AuthenticationService.Authenticate(String login, String password)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.BehaveAsCurrent">
+            <summary>Assigns the &apos;Current&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.BehaveAsNotImplemented">
+            <summary>Assigns the &apos;NotImplemented&apos; behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.Behavior">
+            <summary>Assigns the behavior for all methods of the shimmed type</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.Bind(BankSystem.Services.Authentication.IAuthenticationService)">
+            <summary>Binds the members of the interface to the shim.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.ConstructorIUserStoreIUserFactory">
+            <summary>Sets the shim of AuthenticationService.AuthenticationService(IUserStore userStore, IUserFactory userFactory)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.Deauthenticate">
+            <summary>Sets the shim of AuthenticationService.Deauthenticate()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.IsAuthenticated">
+            <summary>Sets the shim of AuthenticationService.IsAuthenticated()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.SignUpStringString">
+            <summary>Sets the shim of AuthenticationService.SignUp(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.SignedUserGet">
+            <summary>Sets the shim of AuthenticationService.get_SignedUser()</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.ShimAuthenticationService.SignedUserSetIUser">
+            <summary>Sets the shim of AuthenticationService.set_SignedUser(IUser value)</summary>
+        </member>
+        <member name="T:BankSystem.Services.Authentication.Fakes.StubAuthenticationService">
+            <summary>Stub type of BankSystem.Services.Authentication.AuthenticationService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubAuthenticationService.#ctor(BankSystem.DAL.IUserStore,BankSystem.Models.IUserFactory)">
+            <summary>Initializes a new instance</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.StubAuthenticationService.CallBase">
+            <summary>Gets or sets a value that indicates if the base method should be called instead of the fallback behavior</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubAuthenticationService.InitializeStub">
+            <summary>Initializes a new instance of type StubAuthenticationService</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.StubAuthenticationService.InstanceBehavior">
+            <summary>Gets or sets the instance behavior.</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.StubAuthenticationService.InstanceObserver">
+            <summary>Gets or sets the instance observer.</summary>
+        </member>
+        <member name="T:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService">
+            <summary>Stub type of BankSystem.Services.Authentication.IAuthenticationService</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.#ctor">
+            <summary>Initializes a new instance of type StubIAuthenticationService</summary>
+        </member>
+        <member name="F:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.AuthenticateStringString">
+            <summary>Sets the stub of IAuthenticationService.Authenticate(String login, String password)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.BankSystem#Services#Authentication#IAuthenticationService#Authenticate(System.String,System.String)">
+            <summary>Sets the stub of IAuthenticationService.Authenticate(String login, String password)</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.BankSystem#Services#Authentication#IAuthenticationService#Deauthenticate">
+            <summary>Sets the stub of IAuthenticationService.Deauthenticate()</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.BankSystem#Services#Authentication#IAuthenticationService#IsAuthenticated">
+            <summary>Sets the stub of IAuthenticationService.IsAuthenticated()</summary>
+        </member>
+        <member name="M:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.BankSystem#Services#Authentication#IAuthenticationService#SignUp(System.String,System.String)">
+            <summary>Sets the stub of IAuthenticationService.SignUp(String login, String password)</summary>
+        </member>
+        <member name="F:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.Deauthenticate">
+            <summary>Sets the stub of IAuthenticationService.Deauthenticate()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.IsAuthenticated">
+            <summary>Sets the stub of IAuthenticationService.IsAuthenticated()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.SignUpStringString">
+            <summary>Sets the stub of IAuthenticationService.SignUp(String login, String password)</summary>
+        </member>
+        <member name="P:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.BankSystem#Services#Authentication#IAuthenticationService#SignedUser">
+            <summary>Sets the stub of IAuthenticationService.get_SignedUser()</summary>
+        </member>
+        <member name="F:BankSystem.Services.Authentication.Fakes.StubIAuthenticationService.SignedUserGet">
+            <summary>Sets the stub of IAuthenticationService.get_SignedUser()</summary>
+        </member>
+    </members>
+</doc>
