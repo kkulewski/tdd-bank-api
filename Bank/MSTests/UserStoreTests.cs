@@ -8,6 +8,8 @@ namespace MSTests
     [TestClass]
     public class UserStoreTests
     {
+        public TestContext TestContext { get; set; }
+
         [TestMethod]
         public void GetUserByLogin_ReturnsNull_WhenUserListIsEmpty()
         {
@@ -77,6 +79,31 @@ namespace MSTests
 
             // ASSERT
             StringAssert.StartsWith(result.Password, userPassword);
+        }
+
+        [TestMethod,
+         DataSource
+         (
+             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
+             "|DataDirectory|\\UniqueUsers.csv",
+             "UniqueUsers#csv",
+             DataAccessMethod.Random
+         ),
+         DeploymentItem("UniqueUsers.csv")]
+        public void Add_AddsUsers_WithUniqueLogins()
+        {
+            // ARRANGE
+            string login = TestContext.DataRow["login"].ToString();
+            string password = TestContext.DataRow["password"].ToString();
+            decimal balance = 0.0M;
+            IUser user = new User(login, password, balance);
+            IUserStore userStore = new InMemoryUserStore();
+
+            // ACT
+            var result = userStore.Add(user);
+
+            // ASSERT
+            Assert.IsTrue(result);
         }
     }
 }

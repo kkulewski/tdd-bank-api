@@ -1,0 +1,7 @@
+login,password
+random,random
+john,doe
+example_of_very_long_login,pass
+john,example_of_very_long_password
+loginWith123Numbers,pass
+loginWith-Dash,pass
