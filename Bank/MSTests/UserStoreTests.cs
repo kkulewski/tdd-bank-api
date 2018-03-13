@@ -9,6 +9,19 @@ namespace MSTests
     public class UserStoreTests
     {
         [TestMethod]
+        public void GetUserByLogin_ReturnsNull_WhenUserListIsEmpty()
+        {
+            // ARRANGE
+            var userStore = new InMemoryUserStore();
+
+            // ACT
+            var user = userStore.GetUserByLogin("someLogin");
+
+            // ASSERT
+            Assert.IsNull(user);
+        }
+
+        [TestMethod]
         public void Add_ReturnsTrue_WhenAddingUserToEmptyList()
         {
             // ARRANGE
