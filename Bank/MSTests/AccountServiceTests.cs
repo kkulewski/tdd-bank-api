@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BankSystem.Models;
+using BankSystem.Models.Fakes;
 using BankSystem.Services.Account;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -25,6 +25,23 @@ namespace MSTests
             var expectedTransfers = new List<IMoneyTransfer> { transfer1, transfer2 };
             var senderTransfers = sender.PendingTransfers;
             CollectionAssert.AreEqual(expectedTransfers, senderTransfers);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(AccountOperationException))]
+        public void CreateMoneyTransfer_Throws_WhenAmountInvalid()
+        {
+            // ARRANGE
+            decimal invalidAmount = -100.0M;
+            IUser senderStub = new StubIUser();
+            IUser recipientStub = new StubIUser();
+            IAccountService accountService = new AccountService();
+
+            // ACT
+            var transfer = accountService.CreateMoneyTransfer(senderStub, recipientStub, invalidAmount);
+
+            // ASSERT
+            Assert.IsNotNull(transfer);
         }
     }
 }
