@@ -36,7 +36,28 @@ namespace MSTests
         }
 
         [TestMethod]
-        public void GetUserByLogin_ReturnsPreviouslyAddedUser()
+        public void GetUserByLogin_ReturnsUser_WithCorrectLogin()
+        {
+            // ARRANGE
+            var userStore = new InMemoryUserStore();
+
+            var userLogin = "someLogin";
+            IUser userStub = new StubIUser
+            {
+                LoginGet = () => userLogin
+            };
+
+            userStore.Add(userStub);
+
+            // ACT
+            var result = userStore.GetUserByLogin(userLogin);
+
+            // ASSERT
+            StringAssert.StartsWith(result.Login, userLogin);
+        }
+
+        [TestMethod]
+        public void GetUserByLogin_ReturnsUser_WithCorrectPassword()
         {
             // ARRANGE
             var userStore = new InMemoryUserStore();
@@ -55,7 +76,7 @@ namespace MSTests
             var result = userStore.GetUserByLogin(userLogin);
 
             // ASSERT
-            StringAssert.StartsWith(result.Login, userLogin);
+            StringAssert.StartsWith(result.Password, userPassword);
         }
     }
 }
