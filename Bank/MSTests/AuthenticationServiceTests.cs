@@ -28,5 +28,12 @@ namespace MSTests
             // ASSERT
             Assert.IsFalse(authResult);
         }
+
+        [TestMethod]
+        public void WorkInProgressTest()
+        {
+            // ASSERT
+            Assert.Inconclusive();
+        }
     }
 }
