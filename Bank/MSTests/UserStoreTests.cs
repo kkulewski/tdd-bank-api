@@ -26,13 +26,36 @@ namespace MSTests
         {
             // ARRANGE
             var userStore = new InMemoryUserStore();
-            IUser user = new StubIUser();
+            IUser userStub = new StubIUser();
 
             // ACT
-            var result = userStore.Add(user);
+            var result = userStore.Add(userStub);
 
             // ASSERT
             Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void GetUserByLogin_ReturnsPreviouslyAddedUser()
+        {
+            // ARRANGE
+            var userStore = new InMemoryUserStore();
+
+            var userLogin = "someLogin";
+            var userPassword = "somePassword";
+            IUser userStub = new StubIUser
+            {
+                LoginGet = () => userLogin,
+                PasswordGet = () => userPassword
+            };
+
+            userStore.Add(userStub);
+
+            // ACT
+            var result = userStore.GetUserByLogin(userLogin);
+
+            // ASSERT
+            StringAssert.StartsWith(result.Login, userLogin);
         }
     }
 }
