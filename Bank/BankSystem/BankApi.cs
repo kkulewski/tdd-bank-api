@@ -57,15 +57,16 @@ namespace BankSystem
             {
                 return false;
             }
-
-            var transfer = _accountService.CreateMoneyTransfer(sender, recipient, amount);
-            if (transfer == null)
+            
+            try
+            {
+                var transfer = _accountService.CreateMoneyTransfer(sender, recipient, amount);
+                return _accountService.ExecuteMoneyTransfer(transfer);
+            }
+            catch (AccountOperationException)
             {
                 return false;
             }
-
-            var result = _accountService.ExecuteMoneyTransfer(transfer);
-            return result;
         }
 
         public bool SignUp(string login, string password)
