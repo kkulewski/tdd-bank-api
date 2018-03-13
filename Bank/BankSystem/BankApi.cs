@@ -67,5 +67,10 @@ namespace BankSystem
             var result = _accountService.ExecuteMoneyTransfer(transfer);
             return result;
         }
+
+        public bool SignUp(string login, string password)
+        {
+            return _authenticationService.SignUp(login, password);
+        }
     }
 }

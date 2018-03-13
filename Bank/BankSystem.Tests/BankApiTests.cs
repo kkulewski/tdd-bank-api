@@ -192,5 +192,45 @@ namespace BankSystem.Tests
             // ASSERT
             Assert.IsTrue(result);
         }
+
+        [TestMethod]
+        public void SignUp_ReturnFalse_WhenSignUpFails()
+        {
+            // ARRANGE
+            var login = "someLogin";
+            var password = "somePassword";
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(x => x.SignUp(It.IsAny<string>(), It.IsAny<string>())).Returns(false);
+            var accountServiceMock = new Mock<IAccountService>();
+            var userStoreMock = new Mock<IUserStore>();
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, userStoreMock.Object);
+
+            // ACT
+            var result = bank.SignUp(login, password);
+
+            // ASSERT
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void SignUp_ReturnTrue_WhenSignUpSucceeds()
+        {
+            // ARRANGE
+            var login = "someLogin";
+            var password = "somePassword";
+
+            var authServiceMock = new Mock<IAuthenticationService>();
+            authServiceMock.Setup(x => x.SignUp(It.IsAny<string>(), It.IsAny<string>())).Returns(true);
+            var accountServiceMock = new Mock<IAccountService>();
+            var userStoreMock = new Mock<IUserStore>();
+            var bank = new BankApi(authServiceMock.Object, accountServiceMock.Object, userStoreMock.Object);
+
+            // ACT
+            var result = bank.SignUp(login, password);
+
+            // ASSERT
+            Assert.IsTrue(result);
+        }
     }
 }
