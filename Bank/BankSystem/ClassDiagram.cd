@@ -1,7 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="BankSystem.BankApi">
-    <Position X="0.5" Y="3" Width="2" />
+    <Position X="5" Y="5.5" Width="2" />
+    <AssociationLine Name="_accountService" Type="BankSystem.Services.Account.IAccountService">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.037" Y="0.05" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="_authenticationService" Type="BankSystem.Services.Authentication.IAuthenticationService">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.131" Y="0.091" Height="0.182" Width="1.576" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAgCCAAAAACAAAQAAQAAAAAgAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>BankApi.cs</FileName>
@@ -13,21 +23,21 @@
     </ShowAsAssociation>
   </Class>
   <Interface Name="BankSystem.Services.Account.IAccountService">
-    <Position X="3.5" Y="0.5" Width="2.25" />
+    <Position X="2.75" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AABAAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
       <FileName>Services\Account\IAccountService.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BankSystem.DAL.IUserStore">
-    <Position X="3.5" Y="3.25" Width="2.25" />
+    <Position X="7.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>DAL\IUserStore.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="BankSystem.Services.Authentication.IAuthenticationService">
-    <Position X="3.5" Y="5.25" Width="2.25" />
+    <Position X="5.25" Y="3.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAACAAAAAEAAAIgAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>Services\Authentication\IAuthenticationService.cs</FileName>
@@ -37,7 +47,27 @@
     </ShowAsAssociation>
   </Interface>
   <Interface Name="BankSystem.Models.IUser">
-    <Position X="6.75" Y="5.5" Width="1.5" />
+    <Position X="6" Y="1.5" Width="1.5" />
+    <AssociationLine Name="CompletedTransfers" Type="BankSystem.Models.IMoneyTransfer" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="2.688" />
+        <Point X="4.5" Y="2.688" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.172" Y="0.05" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PendingTransfers" Type="BankSystem.Models.IMoneyTransfer" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="2.375" />
+        <Point X="5.918" Y="2.375" />
+        <Point X="5.918" Y="2.375" />
+        <Point X="4.5" Y="2.375" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.173" Y="0.07" Height="0.162" Width="1.202" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAgBAAAAAAAAIAACAAAQAAAAAAA=</HashCode>
       <FileName>Models\IUser.cs</FileName>
@@ -48,11 +78,33 @@
     </ShowAsCollectionAssociation>
   </Interface>
   <Interface Name="BankSystem.Models.IMoneyTransfer">
-    <Position X="9.75" Y="5" Width="1.5" />
+    <Position X="3" Y="0.75" Width="1.5" />
+    <AssociationLine Name="Recipient" Type="BankSystem.Models.IUser" FixedFromPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.562" />
+        <Point X="6" Y="1.562" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.308" Y="0.091" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Sender" Type="BankSystem.Models.IUser" FixedFromPoint="true">
+      <Path>
+        <Point X="4.5" Y="1.812" />
+        <Point X="6" Y="1.812" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.454" Y="0.07" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAAwAIAAAAAAACAAAACAAAAAAAAAAAIAAA=</HashCode>
       <FileName>Models\IMoneyTransfer.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Recipient" />
+      <Property Name="Sender" />
+    </ShowAsAssociation>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
