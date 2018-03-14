@@ -56,5 +56,8 @@
     <Compile Include="DAL\IUserStore.cs" />
     <Compile Include="Models\User.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
